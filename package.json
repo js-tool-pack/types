@@ -91,25 +91,23 @@
     "CHANGELOG.md",
     "LICENSE"
   ],
-  "main": "dist/@tool-pack/types.cjs.js",
-  "module": "dist/@tool-pack/types.esm-bundler.js",
-  "types": "dist/@tool-pack/types.d.ts",
+  "main": "dist/types.cjs.js",
+  "module": "dist/types.esm-bundler.js",
+  "types": "dist/types.d.ts",
   "exports": {
     ".": {
       "import": {
-        "node": "./dist/@tool-pack/types.cjs.js",
-        "default": "./dist/@tool-pack/types.esm-bundler.js"
+        "node": "./dist/types.cjs.js",
+        "default": "./dist/types.esm-bundler.js"
       },
-      "require": "./dist/@tool-pack/types.cjs.js"
+      "require": "./dist/types.cjs.js"
     }
   },
   "buildOptions": {
-    "name": "@toolPack/types",
+    "name": "Types",
     "formats": [
       "esm-bundler",
-      "esm-browser",
-      "cjs",
-      "global"
+      "cjs"
     ]
   },
   "publishConfig": {

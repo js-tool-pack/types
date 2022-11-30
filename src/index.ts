@@ -1,1 +1,5 @@
-export const test = () => 'test';
+export * from './tuple';
+export * from './string';
+export * from './object';
+export * from './dom';
+export * from './object-path';

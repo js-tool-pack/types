@@ -4,6 +4,7 @@ import {
   DotTrim,
   EmptyNotDef,
   RemoveStrStart,
+  StrRepeat,
   StrSplit,
   StrSplitWithNumber,
   StrTemplate,
@@ -123,5 +124,19 @@ describe('string', () => {
     expectType<T5>(['1', '1'] as [`${number}`, `${number}`]);
     // @ts-expect-error
     expectError<t5>('');
+  });
+  test('StrRepeat', () => {
+    expectType<StrRepeat<'123', 2>>('123123');
+
+    const v = '123123' as string;
+    // @ts-expect-error
+    expectError<StrRepeat<'123', 2>>(v);
+
+    // @ts-expect-error
+    expectError<StrRepeat<'123', 2>>('12312');
+
+    // @ts-expect-error
+    type T = StrRepeat<9, 2>; // 第一个参数限定了string，否则会报错
+    expectType<T>('99');
   });
 });

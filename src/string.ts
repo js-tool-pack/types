@@ -1,4 +1,4 @@
-import type { TupleShift } from './tuple';
+import type { Tuple, TupleJoin, TupleShift } from './tuple';
 
 /**
  * 类似字符串trim方法，只是不是trim空格，而是trim点号
@@ -119,3 +119,13 @@ export type StrSplitWithNumber<
 export type StrSplit<T, D extends string = '.'> = T extends `${infer First}${D}${infer Rest}`
   ? [First, ...StrSplit<Rest>]
   : [T];
+
+/**
+ * 类似 String.prototype.repeat
+ *
+ * @example
+ *
+ * StrRepeat<'123', 2>; // '123123'
+ *
+ */
+export type StrRepeat<T extends string, R extends number> = TupleJoin<Tuple<T, R>, ''>;

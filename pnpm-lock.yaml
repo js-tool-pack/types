@@ -6,7 +6,7 @@ specifiers:
   '@microsoft/api-extractor': ^7.33.6
   '@mxssfd/core': 5.0.1-beta.1
   '@mxssfd/typedoc-theme': ^1.0.3
-  '@rollup/plugin-json': ^5.0.1
+  '@rollup/plugin-json': ^6.0.0
   '@types/fs-extra': ^9.0.13
   '@types/jest': ^29.2.3
   '@types/minimist': ^1.2.2
@@ -50,7 +50,7 @@ devDependencies:
   '@microsoft/api-extractor': 7.33.6
   '@mxssfd/core': 5.0.1-beta.1
   '@mxssfd/typedoc-theme': 1.0.3_typedoc@0.23.21
-  '@rollup/plugin-json': 5.0.1_rollup@3.4.0
+  '@rollup/plugin-json': 6.0.0_rollup@3.4.0
   '@types/fs-extra': 9.0.13
   '@types/jest': 29.2.3
   '@types/minimist': 1.2.2
@@ -1147,8 +1147,8 @@ packages:
       config-chain: 1.1.13
     dev: true
 
-  /@rollup/plugin-json/5.0.1_rollup@3.4.0:
-    resolution: {integrity: sha512-QCwhZZLvM8nRcTHyR1vOgyTMiAnjiNj1ebD/BMRvbO1oc/z14lZH6PfxXeegee2B6mky/u9fia4fxRM4TqrUaw==}
+  /@rollup/plugin-json/6.0.0_rollup@3.4.0:
+    resolution: {integrity: sha512-i/4C5Jrdr1XUarRhVu27EEwjt4GObltD7c+MkCIpO2QIbojw8MUs+CCTqOphQi3Qtg1FLmYt+l+6YeoIf51J7w==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.20.0||^2.0.0||^3.0.0

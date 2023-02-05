@@ -18,3 +18,7 @@ export * as Dom from './dom';
  * 对象路径类型工具
  */
 export * as ObjectPath from './object-path';
+/**
+ * 其他不好分类的类型工具
+ */
+export * as Others from './others';

@@ -191,3 +191,38 @@ export type OmitFirstParameters<T extends Function> = T extends (_: any, ...args
 export type UrlParams<T, R = {}> = T extends `${infer K}=${infer V}${infer Other}`
   ? UrlParams<Other extends `&${infer O}` ? O : Other, { [k in K]: V }> & R
   : R;
+
+/**
+ * Readonly深度递归版
+ * ---
+ * 官方提供的Readonly只有一层，类似Object.assign
+ *
+ * @example
+ *
+ * interface A {
+ *   a: number;
+ *   b: string;
+ *   c: {
+ *     d: boolean;
+ *     f: string;
+ *   };
+ * }
+ *
+ * type B = DeepReadonly<A>;
+ * // type B 和下面注释的类型相等
+ * // type B = {
+ * //   readonly a: number;
+ * //   readonly b: string;
+ * //   readonly c: DeepReadonly<{
+ * //     d: boolean;
+ * //     f: string;
+ * //   }>;
+ * // }
+ *
+ * const b: B = { a: 1, b: '', c: { d: true, f: '' } };
+ *
+ * b.c.d = false; // error 不能修改.c.d，ts检查会报错
+ */
+export type DeepReadonly<T> = {
+  readonly [K in keyof T]: T[K] extends object ? DeepReadonly<T[K]> : T[K];
+};

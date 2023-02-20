@@ -12,6 +12,7 @@ import {
   RequiredOnly,
   UrlParams,
   WritableKeys,
+  DeepReadonly,
 } from '../src';
 import * as console from 'console';
 
@@ -210,5 +211,37 @@ describe('object', () => {
     expectType<T>({ a: '1', b: '2' });
     // @ts-expect-error
     expectError<T>({ a: '1', b: '2', c: 123 });
+  });
+  test('DeepReadonly', () => {
+    interface A {
+      a: number;
+      b: string;
+      c: {
+        d: boolean;
+        f: string;
+      };
+    }
+
+    type B = DeepReadonly<A>;
+
+    interface C {
+      readonly a: number;
+      readonly b: string;
+      readonly c: DeepReadonly<{
+        d: boolean;
+        f: string;
+      }>;
+    }
+
+    const b: B = { a: 1, b: '', c: { d: true, f: '' } };
+
+    // @ts-expect-error
+    b.c.d = false; // error 不能修改.c.d，ts检查会报错
+
+    // @ts-expect-error
+    b.a = 2; // error 不能修改.a，ts检查会报错
+
+    // type B 和interface C类型相等
+    expectType<B>({} as C);
   });
 });

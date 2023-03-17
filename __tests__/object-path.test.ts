@@ -1,5 +1,5 @@
 import { expectError, expectType } from './utils';
-import { PathOf, TransferPath, TransferPathOf, TypeOfPath, ValueMatchingPath } from '../src';
+import type { PathOf, TransferPath, TransferPathOf, TypeOfPath, ValueMatchingPath } from '../src';
 const ab: 'a' | 'b' = Math.random() > 0.5 ? 'a' : 'b';
 describe('object-path', function () {
   test('TypeOfPath', () => {

@@ -1,4 +1,4 @@
-import { ReadonlyKeys } from './object';
+import type { ReadonlyKeys } from './object';
 
 /**
  * 获取所有可更改的css属性所组成的新type

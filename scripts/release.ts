@@ -4,7 +4,7 @@ import { prompt } from 'enquirer';
 import { execa } from 'execa';
 import * as semver from 'semver';
 import chalk from 'chalk';
-import { ReleaseType } from 'semver';
+import type { ReleaseType } from 'semver';
 import { isMonoRepo, rootDir } from './utils';
 
 const rootPkgJson = require('../package.json');

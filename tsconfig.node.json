@@ -5,6 +5,14 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true
+
+    // tsutils 会报错 强制 TypeScript 在从 node_modules 中的包中读取时查询 package.json 文件的 exports 字段
+    // 此选项在--moduleResolution的node16、nodenext和bundler选项下默认为true
+    //  "resolvePackageJsonExports": false
+
+    //  强制 TypeScript 在从其祖先目录包含 package.json 的文件执行以 # 开头的查找时查询 package.json 文件的 imports 字段
+    // 此选项在--moduleResolution的node16、nodenext和bundler选项下默认为true
+    // "resolvePackageJsonImports": false
   },
   "include": ["./scripts/*.ts", "package.json", "rollup.config.js"]
 }

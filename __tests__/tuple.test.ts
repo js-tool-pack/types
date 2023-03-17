@@ -1,6 +1,5 @@
-import type { Tuple } from '../src';
 import { expectError, expectType } from './utils';
-import { TupleJoin, TupleM2N, TupleShift, TupleToUnion } from '../src';
+import type { Tuple, TupleJoin, TupleM2N, TupleShift, TupleToUnion } from '../src';
 
 describe('tuple', () => {
   test('tuple', () => {

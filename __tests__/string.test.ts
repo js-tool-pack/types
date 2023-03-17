@@ -1,5 +1,5 @@
 import { expectError, expectType } from './utils';
-import {
+import type {
   BracketsToEmpty,
   DotTrim,
   EmptyNotDef,

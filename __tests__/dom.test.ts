@@ -1,5 +1,5 @@
 import { expectError, expectType } from './utils';
-import { SettableDOMProps, SettableDOMStyle } from '../src';
+import type { SettableDOMProps, SettableDOMStyle } from '../src';
 
 describe('dom', () => {
   test('SettableProps', () => {

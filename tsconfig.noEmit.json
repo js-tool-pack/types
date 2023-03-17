@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true
+  },
+  "include": ["__tests__/**/*.ts", "tests/*/*.ts", "src/**/*.d.ts", "src/**/*.ts"]
+}

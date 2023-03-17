@@ -1,5 +1,5 @@
-export * from './tuple';
-export * from './string';
-export * from './object';
-export * from './dom';
-export * from './object-path';
+export type * from './tuple';
+export type * from './string';
+export type * from './object';
+export type * from './dom';
+export type * from './object-path';

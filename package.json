@@ -66,7 +66,7 @@
     "esno": "^0.16.3",
     "execa": "^7.1.1",
     "fs-extra": "^10.1.0",
-    "gh-pages": "^4.0.0",
+    "gh-pages": "^5.0.0",
     "husky": "^8.0.3",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",

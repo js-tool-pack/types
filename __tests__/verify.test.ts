@@ -1,5 +1,5 @@
 import { expectError, expectType } from './utils';
-import type { IsUnknown, IsAny } from '../src/';
+import type { IsUnknown, IsAny, IsUnion } from '../src/';
 
 describe('verify', function () {
   test('IsUnknown', () => {
@@ -15,6 +15,7 @@ describe('verify', function () {
     expectType<IsUnknown<null>>(false);
     expectType<IsUnknown<Symbol>>(false);
     expectType<IsUnknown<0>>(false);
+    expectType<IsUnknown<number>>(false);
     expectType<IsUnknown<{}>>(false);
     expectType<IsUnknown<{ a: string }>>(false);
     expectType<IsUnknown<object>>(false);
@@ -35,11 +36,36 @@ describe('verify', function () {
     expectType<IsAny<null>>(false);
     expectType<IsAny<Symbol>>(false);
     expectType<IsAny<0>>(false);
+    expectType<IsAny<number>>(false);
     expectType<IsAny<{}>>(false);
     expectType<IsAny<{ a: string }>>(false);
     expectType<IsAny<object>>(false);
     expectType<IsAny<void>>(false);
     // @ts-expect-error
     expectError<IsAny<unknown>>(true);
+  });
+  test('IsUnion', () => {
+    expectType<IsUnion<{ a: number } | { b: string }>>(true);
+    expectType<IsUnion<boolean>>(true);
+    expectType<IsUnion<true | false>>(true);
+    expectType<IsUnion<false>>(false);
+    expectType<IsUnion<true>>(false);
+    expectType<IsUnion<{ a: number } & { b: string }>>(false);
+    expectType<IsUnion<any>>(false);
+    expectType<IsUnion<unknown>>(false);
+    expectType<IsUnion<never>>(false);
+    expectType<IsUnion<string>>(false);
+    expectType<IsUnion<''>>(false);
+    expectType<IsUnion<undefined>>(false);
+    expectType<IsUnion<null>>(false);
+    expectType<IsUnion<Symbol>>(false);
+    expectType<IsUnion<number>>(false);
+    expectType<IsUnion<0>>(false);
+    expectType<IsUnion<{}>>(false);
+    expectType<IsUnion<{ a: string }>>(false);
+    expectType<IsUnion<object>>(false);
+    expectType<IsUnion<void>>(false);
+    // @ts-expect-error
+    expectError<IsUnion<unknown>>(true);
   });
 });

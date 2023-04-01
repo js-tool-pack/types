@@ -1,5 +1,12 @@
 import { expectError, expectType } from './utils';
-import type { PathOf, TransferPath, TransferPathOf, TypeOfPath, ValueMatchingPath } from '../src';
+import type {
+  PathOf,
+  TransferPath,
+  TransferPathOf,
+  TypeOfPath,
+  ValueMatchingPath,
+  PathUnion,
+} from '../src';
 const ab: 'a' | 'b' = Math.random() > 0.5 ? 'a' : 'b';
 describe('object-path', function () {
   test('TypeOfPath', () => {
@@ -99,5 +106,23 @@ describe('object-path', function () {
     expectType<T>('a');
     // @ts-expect-error
     expectError<ValueMatchingPath<{ a: { b: string } }, 'a.c'>>('');
+  });
+  test('PathUnion', () => {
+    expectType<PathUnion<{ a: number }>>('a');
+    // @ts-expect-error
+    expectError<PathUnion<{ a: number }>>('a' as 'a' | 'b');
+    expectType<PathUnion<{ a: number; b: string }>>('a' as 'a' | 'b');
+
+    type T = PathUnion<{ a: number; b: string; bb: { c: string; cc: { d: string } } }>;
+    expectType<T>('a' as 'a' | 'b' | 'bb' | 'bb.c' | 'bb.cc' | 'bb.cc.d');
+
+    type T3 = PathUnion<{
+      a: number;
+      b: { c: boolean; cc: { dd: string } };
+      bb: { c: string; cc: { d: string } };
+    }>;
+    expectType<T3>(
+      'a' as 'a' | 'b' | 'b.c' | 'b.cc' | 'b.cc.dd' | 'bb' | 'bb.c' | 'bb.cc' | 'bb.cc.d',
+    );
   });
 });

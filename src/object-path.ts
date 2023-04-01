@@ -1,5 +1,6 @@
 // reference https://mp.weixin.qq.com/s/KJdUdwbLN4g4M7xy34m-fA
 import type { BracketsToEmpty, DotTrim, EmptyNotDef, RemoveStrStart } from './string';
+import type { IsAny } from './verify';
 
 type OneLevelPathOf<T> = keyof T & (string | number);
 type PathForHint<T> = OneLevelPathOf<T>;
@@ -202,3 +203,39 @@ export type TypeOfPath<T, K extends string> = K extends `${infer A}.${infer B}`
   : T extends Array<infer I>
   ? I
   : never;
+
+/**
+ * 由对象路径组成的union
+ *
+ * from: @nestjs/config
+ *
+ * @example
+ * // 'a'
+ * PathUnion<{ a: number }>;
+ *
+ * // 'a' | 'b'
+ * PathUnion<{ a: number; b: string }>;
+ *
+ * // 'a' | 'b' | 'bb' | 'bb.c' | 'bb.cc' | 'bb.cc.d'
+ * PathUnion<{ a: number; b: string; bb: { c: string; cc: { d: string } }}>;
+ *
+ * // 'a' | 'b' | 'b.c' | 'b.cc' | 'b.cc.dd' | 'bb' | 'bb.c' | 'bb.cc' | 'bb.cc.d'
+ * PathUnion<{a: number; b: { c: boolean; cc: { dd: string }}; bb: { c: string; cc: { d: string }}}>;
+ */
+export type PathUnion<T> = keyof T extends string
+  ? PathImpl2<T> extends infer P
+    ? P extends string | keyof T
+      ? P
+      : keyof T
+    : keyof T
+  : never;
+type PathImpl<T, Key extends keyof T> = Key extends string
+  ? IsAny<T[Key]> extends true
+    ? never
+    : T[Key] extends Record<string, any>
+    ?
+        | `${Key}.${PathImpl<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
+        | `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
+    : never
+  : never;
+type PathImpl2<T> = PathImpl<T, keyof T> | keyof T;

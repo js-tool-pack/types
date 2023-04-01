@@ -12,7 +12,7 @@
     "prepare": "husky install && npm run pkg:init",
     "husky-msg-init": "husky add .husky/pre-commit \"npx lint-staged --allow-empty \"$1\"\"&husky add .husky/commit-msg \"npx commitlint --edit \"$1\"\"",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "ts-check": "tsc --noEmit && tsc -p ./tsconfig.node.json --noEmit",
+    "ts-check": "tsc -p ./tsconfig.noEmit.json --noEmit && tsc -p ./tsconfig.node.json --noEmit",
     "lint-check": "eslint .",
     "prettier-check": "prettier ./ --check",
     "check-all": "run-p ts-check lint-check prettier-check",
@@ -84,7 +84,7 @@
     "ts-jest": "^29.0.5",
     "tslib": "^2.5.0",
     "typedoc": "^0.23.27",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.3"
   },
   "files": [
     "dist",

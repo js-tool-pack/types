@@ -5,7 +5,7 @@ specifiers:
   '@commitlint/config-conventional': ^17.4.4
   '@microsoft/api-extractor': ^7.34.4
   '@mxssfd/core': 5.0.1-beta.1
-  '@mxssfd/typedoc-theme': ^1.0.3
+  '@mxssfd/typedoc-theme': ^1.0.6
   '@rollup/plugin-json': ^6.0.0
   '@types/fs-extra': ^11.0.1
   '@types/jest': ^29.5.0
@@ -49,7 +49,7 @@ devDependencies:
   '@commitlint/config-conventional': 17.4.4
   '@microsoft/api-extractor': 7.34.4_@types+node@18.15.3
   '@mxssfd/core': 5.0.1-beta.1
-  '@mxssfd/typedoc-theme': 1.0.3_typedoc@0.23.27
+  '@mxssfd/typedoc-theme': 1.0.6_typedoc@0.23.27
   '@rollup/plugin-json': 6.0.0_rollup@3.19.1
   '@types/fs-extra': 11.0.1
   '@types/jest': 29.5.0
@@ -1221,8 +1221,8 @@ packages:
       '@mxssfd/types': 5.0.1-beta.1
     dev: true
 
-  /@mxssfd/typedoc-theme/1.0.3_typedoc@0.23.27:
-    resolution: {integrity: sha512-xtgE5+Pe3Dk2NSqYyZKIz8Zi6/Mupps+nIFtfL7hFTN3vjXpvcFFevJg7DcCwD51q/tPy0VEivOhbfpCrocvsA==}
+  /@mxssfd/typedoc-theme/1.0.6_typedoc@0.23.27:
+    resolution: {integrity: sha512-GmaVRWWCaL9jIr58uKyXuBS+yn5L4e5BznclGCB+VlDSGHfZEc8GZdVc4ApKFUC3UEtZkS3fWy9S5aJMQttUyQ==}
     engines: {node: '>= 14'}
     peerDependencies:
       typedoc: ^0.23.21

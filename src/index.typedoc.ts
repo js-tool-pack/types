@@ -1,4 +1,8 @@
 /**
+ * 类型校验工具
+ */
+export * as Verify from './verify';
+/**
  * 元组相关类型工具
  */
 export * as Tuple from './tuple';
@@ -18,3 +22,7 @@ export * as Dom from './dom';
  * 对象路径类型工具
  */
 export * as ObjectPath from './object-path';
+/**
+ * 工具类型
+ */
+export * as Utils from './utils';

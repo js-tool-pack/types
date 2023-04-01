@@ -1,5 +1,5 @@
 import { expectError, expectType } from './utils';
-import type { IsUnknown } from '../src/';
+import type { IsUnknown, IsAny } from '../src/';
 
 describe('verify', function () {
   test('IsUnknown', () => {
@@ -21,5 +21,25 @@ describe('verify', function () {
     expectType<IsUnknown<void>>(false);
     // @ts-expect-error
     expectError<IsUnknown<unknown>>(false);
+  });
+  test('IsAny', () => {
+    expectType<IsAny<any>>(true);
+    expectType<IsAny<unknown>>(false);
+    expectType<IsAny<never>>(false);
+    expectType<IsAny<boolean>>(false);
+    expectType<IsAny<string>>(false);
+    expectType<IsAny<''>>(false);
+    expectType<IsAny<false>>(false);
+    expectType<IsAny<true>>(false);
+    expectType<IsAny<undefined>>(false);
+    expectType<IsAny<null>>(false);
+    expectType<IsAny<Symbol>>(false);
+    expectType<IsAny<0>>(false);
+    expectType<IsAny<{}>>(false);
+    expectType<IsAny<{ a: string }>>(false);
+    expectType<IsAny<object>>(false);
+    expectType<IsAny<void>>(false);
+    // @ts-expect-error
+    expectError<IsAny<unknown>>(true);
   });
 });

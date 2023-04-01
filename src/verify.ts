@@ -1,4 +1,4 @@
-import type { AntiBool } from './utils';
+// import type { AntiBool } from './utils';
 
 type IsUnknownExtend<T, B extends boolean> = unknown extends T ? B : false;
 type IsUnknownLike<T> = [keyof T] extends [never] ? (never extends T ? true : false) : false;
@@ -28,4 +28,5 @@ export type IsUnknown<T> = IsUnknownExtend<T, IsUnknownLike<T>>;
  * type t7 = IsAny<unknown>; // false
  *
  */
-export type IsAny<T> = IsUnknownExtend<T, AntiBool<IsUnknownLike<T>>>;
+export type IsAny<T> = 0 extends 1 & T ? true : false;
+// export type IsAny<T> = IsUnknownExtend<T, AntiBool<IsUnknownLike<T>>>;

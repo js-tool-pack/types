@@ -69,3 +69,8 @@ export type TupleJoin<T extends any[], U extends string | number> = T[0] extends
   : T['length'] extends 1
   ? T[0]
   : `${T[0]}${U}${TupleJoin<TupleShift<T>, U>}`;
+
+/**
+ * 坐标点
+ */
+export type Point = [x: number, y: number];

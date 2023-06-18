@@ -47,7 +47,7 @@
     "@commitlint/config-conventional": "^17.4.4",
     "@microsoft/api-extractor": "^7.34.4",
     "@mxssfd/core": "5.0.1-beta.1",
-    "@mxssfd/typedoc-theme": "^1.0.6",
+    "@mxssfd/typedoc-theme": "^1.1.2",
     "@rollup/plugin-json": "^6.0.0",
     "@types/fs-extra": "^11.0.1",
     "@types/jest": "^29.5.0",

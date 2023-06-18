@@ -3,6 +3,8 @@
   "htmlLang": "zh-CN",
   "includeVersion": true,
   "name": "@tool-pack/types",
+  "plugin": ["@mxssfd/typedoc-theme"],
+  "theme": "my-theme",
   "customCss": "./typedoc.theme.css",
   "sort": ["static-first", "kind", "enum-value-ascending"],
   "categoryOrder": ["file"],

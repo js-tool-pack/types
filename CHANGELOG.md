@@ -1,3 +1,9 @@
+## [0.0.3](https://github.com/js-tool-pack/types/compare/v0.0.2...v0.0.3) (2023-06-18)
+
+### Features
+
+- `Point` ([62c6a8c](https://github.com/js-tool-pack/types/commit/62c6a8c05c0f0e9b5e82f8fbddc8bb99b3466590))
+
 ## [0.0.2](https://github.com/js-tool-pack/types/compare/v0.0.1...v0.0.2) (2023-04-01)
 
 ### Bug Fixes

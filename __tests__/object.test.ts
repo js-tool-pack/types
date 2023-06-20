@@ -14,6 +14,7 @@ import type {
   WritableKeys,
   DeepReadonly,
   RequiredPart,
+  PartialPart,
 } from '../src';
 import * as console from 'console';
 
@@ -282,5 +283,23 @@ describe('object', () => {
       b?: number;
       c: number;
     }>(obj2);
+  });
+  test('PartialPart', () => {
+    interface O {
+      a: number;
+      b: number;
+      c: number;
+    }
+
+    const obj: PartialPart<O, 'a' | 'c'> = { b: 2 };
+
+    // @ts-expect-error
+    expectError<O>(obj);
+
+    expectType<{
+      a?: number;
+      b: number;
+      c?: number;
+    }>(obj);
   });
 });

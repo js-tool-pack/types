@@ -239,7 +239,24 @@ export type DeepReadonly<T> = {
  * }
  *
  * RequiredPart<O, 'a'>; // { a: number; b?: number; c: number; }
-
  *
  */
 export type RequiredPart<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+
+/**
+ * 把一个对象选中的key从Required改为Partial
+ *
+ * 功能与RequiredPart相反
+ *
+ * @example
+ *
+ * interface O {
+ *   a: number;
+ *   b: number;
+ *   c: number;
+ * }
+ *
+ * RequiredPart<O, 'a' | 'c'>; // { a?: number; b: number; c?: number; }
+ *
+ */
+export type PartialPart<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;

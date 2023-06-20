@@ -1,3 +1,9 @@
+## [0.0.4](https://github.com/js-tool-pack/types/compare/v0.0.3...v0.0.4) (2023-06-20)
+
+### Features
+
+- **object:** 新增 RequiredPart，把一个对象选中的 key 从 Partial 改为 Required ([a80d007](https://github.com/js-tool-pack/types/commit/a80d0073e6469e52e4eaaee5e684837c19cade91))
+
 ## [0.0.3](https://github.com/js-tool-pack/types/compare/v0.0.2...v0.0.3) (2023-06-18)
 
 ### Features

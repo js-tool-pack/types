@@ -226,3 +226,20 @@ export type UrlParams<T, R = {}> = T extends `${infer K}=${infer V}${infer Other
 export type DeepReadonly<T> = {
   readonly [K in keyof T]: T[K] extends object ? DeepReadonly<T[K]> : T[K];
 };
+
+/**
+ * 把一个对象选中的key从Partial改为Required
+ *
+ * @example
+ *
+ * interface O {
+ *   a?: number;
+ *   b?: number;
+ *   c: number;
+ * }
+ *
+ * RequiredPart<O, 'a'>; // { a: number; b?: number; c: number; }
+
+ *
+ */
+export type RequiredPart<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;

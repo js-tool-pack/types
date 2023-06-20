@@ -13,6 +13,7 @@ import type {
   UrlParams,
   WritableKeys,
   DeepReadonly,
+  RequiredPart,
 } from '../src';
 import * as console from 'console';
 
@@ -243,5 +244,43 @@ describe('object', () => {
 
     // type B 和interface C类型相等
     expectType<B>({} as C);
+  });
+
+  test('RequiredPart', () => {
+    interface O {
+      a?: number;
+      b?: number;
+      c: number;
+    }
+
+    const obj: O = { c: 1 };
+
+    const obj2: RequiredPart<O, 'a'> = { a: 1, c: 2 };
+
+    expectType<number | undefined>(obj.a);
+    // @ts-expect-error
+    expectError<number>(obj.a);
+    expectType<number | undefined>(obj.b);
+    // @ts-expect-error
+    expectError<number>(obj.b);
+    expectType<number>(obj.c);
+
+    expectType<number>(obj2.a);
+    // @ts-expect-error
+    expectError<number>(obj2.b);
+    expectType<number>(obj2.c);
+
+    expectError<{
+      a: number;
+      b?: number;
+      c: number;
+      // @ts-expect-error
+    }>(obj);
+
+    expectType<{
+      a: number;
+      b?: number;
+      c: number;
+    }>(obj2);
   });
 });

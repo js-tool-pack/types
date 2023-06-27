@@ -15,6 +15,7 @@ import type {
   DeepReadonly,
   RequiredPart,
   PartialPart,
+  TupleToObj,
 } from '../src';
 import * as console from 'console';
 
@@ -301,5 +302,24 @@ describe('object', () => {
       b: number;
       c?: number;
     }>(obj);
+  });
+  test('TupleToObj', () => {
+    const a = ['a', 'b', 'c', 1, 2, 3] as const;
+
+    type T = TupleToObj<typeof a, string>;
+
+    expectType<T>({});
+    expectType<Required<T>>({ '1': '', '2': '', '3': '', a: '', b: '', c: '' });
+    expectType<T>({ '1': '', '2': '', '3': '', a: '', b: '', c: '' });
+    // @ts-expect-error
+    expectError<Required<T>>({ '1': '', '2': '', '3': '', a: '', b: '', c: '', d: '' });
+
+    type T2 = TupleToObj<typeof a, string, 'a' | 'c', 'dd'>;
+
+    expectType<T2>({});
+    expectType<Required<T2>>({ '1': '', '2': '', '3': '', a: 'dd', b: '', c: 'dd' });
+    expectType<T2>({ '1': '', '2': '', '3': '', a: 'dd', b: '', c: 'dd' });
+    // @ts-expect-error
+    expectError<Required<T2>>({ '1': '', '2': '', '3': '', a: 'd', b: '', c: 'd' });
   });
 });

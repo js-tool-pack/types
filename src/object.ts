@@ -260,3 +260,16 @@ export type RequiredPart<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K
  *
  */
 export type PartialPart<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+/**
+ * 把元组转为对象，并用元组的元素作为对象的key
+ *
+ * @example
+ *
+ * const a = ['a', 'b', 'c', 1, 2, 3] as const;
+ * type T = TupleToObj<typeof a, string>; // { '1'?: string; '2'?: string; '3'?: string; a?: string; b?: string; c?: string }
+ * type T2 = TupleToObj<typeof a, string, 'a' | 'c', 'dd'>; // { '1'?: string; '2'?: string; '3'?: string; a?: 'dd'; b?: string; c?: 'dd' }
+ */
+export type TupleToObj<T extends ReadonlyArray<string | number>, V, E = null, V2 = null> = {
+  [K in T[number]]?: K extends E ? V2 : V;
+};

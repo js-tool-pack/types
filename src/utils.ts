@@ -7,3 +7,8 @@
  *
  */
 export type AntiBool<T extends boolean> = T extends true ? false : true;
+
+/**
+ * 能省几个字母
+ */
+export type FN = () => void;

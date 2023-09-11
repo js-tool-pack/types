@@ -278,6 +278,8 @@ type RequiredOptional<T> = { [K in keyof T]-?: T[K] | undefined };
 /**
  * 转换对象中部分可选属性为必选，并且原值类型加上`| undefined`
  *
+ * @see {@link ConvertOptional}
+ *
  * @example
  *
  * interface T {
@@ -297,3 +299,27 @@ export type ConvertOptionalPart<T, K extends keyof T, OK = OptionalKeys<Pick<T, 
   RequiredOptional<Pick<T, Extract<keyof T, OK>>> &
     // 排除可选属性
     Omit<T, Extract<keyof T, OK>>;
+
+/**
+ * 转换对象中所有可选属性为必选，并且原值类型加上`| undefined`
+ *
+ * @see {@link ConvertOptionalPart}
+ *
+ * @example
+ *
+ * interface T {
+ *   a?: 1;
+ *   b?: 2;
+ *   c: 3;
+ * }
+ *
+ * ConvertOptional<T> // { a: 1 | undefined; b: 2 | undefined; c: 3}
+ *
+ * // 强制转换所有
+ * ConvertOptional<T, keyof T> // { a: 1 | undefined; b: 2 | undefined; c: 3 | undefined}
+ *
+ */
+export type ConvertOptional<T, OK = OptionalKeys<T>> = RequiredOptional<
+  Pick<T, Extract<keyof T, OK>>
+> &
+  Omit<T, Extract<keyof T, OK>>;

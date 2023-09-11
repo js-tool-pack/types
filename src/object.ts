@@ -273,3 +273,27 @@ export type PartialPart<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
 export type TupleToObj<T extends ReadonlyArray<string | number>, V, E = null, V2 = null> = {
   [K in T[number]]?: K extends E ? V2 : V;
 };
+
+type RequiredOptional<T> = { [K in keyof T]-?: T[K] | undefined };
+/**
+ * 转换对象中部分可选属性为必选，并且原值类型加上`| undefined`
+ *
+ * @example
+ *
+ * interface T {
+ *   a?: 1;
+ *   b?: 2;
+ *   c: 3;
+ * }
+ *
+ * ConvertOptionalPart<T, 'a'> // { a: 1 | undefined; b?: 2; c: 3}
+ * // c 不是可选属性而被忽略
+ * ConvertOptionalPart<T, 'a' | 'b' | 'c'> // { a: 1 | undefined; b: 2 | undefined; c: 3}
+ *
+ *
+ */
+export type ConvertOptionalPart<T, K extends keyof T, OK = OptionalKeys<Pick<T, K>>> =
+  // 挑选可选属性并转为对应类型加 | undefined
+  RequiredOptional<Pick<T, Extract<keyof T, OK>>> &
+    // 排除可选属性
+    Omit<T, Extract<keyof T, OK>>;

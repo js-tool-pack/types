@@ -18,6 +18,7 @@ import type {
   TupleToObj,
 } from '../src';
 import * as console from 'console';
+import { ConvertOptionalPart } from '../src';
 
 const ab: 'a' | 'b' = Math.random() > 0.5 ? 'a' : 'b';
 const abc: 'a' | 'b' | 'c' = Math.random() > 0.5 ? 'a' : Math.random() > 0.5 ? 'b' : 'c';
@@ -321,5 +322,82 @@ describe('object', () => {
     expectType<T2>({ '1': '', '2': '', '3': '', a: 'dd', b: '', c: 'dd' });
     // @ts-expect-error
     expectError<Required<T2>>({ '1': '', '2': '', '3': '', a: 'd', b: '', c: 'd' });
+  });
+
+  test('ConvertOptionalPart', () => {
+    interface T {
+      a?: 1;
+      b: 2;
+      c: 3;
+      d: 4;
+      e: 5;
+    }
+
+    expectType<ConvertOptionalPart<T, 'a'>>({} as { a: 1; b: 2; c: 3; d: 4; e: 5 });
+    expectType<ConvertOptionalPart<T, 'a'>>({} as { a: undefined; b: 2; c: 3; d: 4; e: 5 });
+    expectType<ConvertOptionalPart<T, 'a'>>({} as { a: 1 | undefined; b: 2; c: 3; d: 4; e: 5 });
+
+    expectType<ConvertOptionalPart<T, 'a'>>({ a: 1, b: 2, c: 3, d: 4, e: 5 });
+    expectType<ConvertOptionalPart<T, 'a'>>({ a: undefined, b: 2, c: 3, d: 4, e: 5 });
+
+    // @ts-expect-error
+    expectError<ConvertOptionalPart<T, 'a'>>({ b: 2, c: 3, d: 4, e: 5 });
+    // @ts-expect-error
+    expectError<ConvertOptionalPart<T, 'a'>>({ a: 2, b: 2, c: 3, d: 4, e: 5 });
+    // @ts-expect-error
+    expectError<ConvertOptionalPart<T, 'a'>>({} as { a?: 1; b: 2; c: 3; d: 4; e: 5 });
+
+    // @ts-expect-error
+    expectError<ConvertOptionalPart<Partial<T>, 'a'>>({});
+
+    expectType<ConvertOptionalPart<T, 'a' | 'b' | 'c'>>({ a: 1, b: 2, c: 3, d: 4, e: 5 });
+
+    // @ts-expect-error
+    expectError<ConvertOptionalPart<T, 'a' | 'b' | 'c'>>({ d: 4, e: 5 });
+
+    const v = {
+      a: undefined,
+      b: undefined,
+      c: undefined,
+      d: 4,
+      e: 5,
+    };
+    // @ts-expect-error 因为 T 只有 a 是可选属性，b 和 c 不是可选属性而被忽略
+    expectError<ConvertOptionalPart<T, 'a' | 'b' | 'c'>>(v);
+
+    expectType<ConvertOptionalPart<T, 'a' | 'b' | 'c'>>({
+      a: undefined,
+      b: 2,
+      c: 3,
+      d: 4,
+      e: 5,
+    });
+
+    interface T2 {
+      a?: 1;
+      b?: 2;
+      c?: 3;
+      d?: 4;
+      e?: 5;
+    }
+
+    expectType<ConvertOptionalPart<T2, 'a' | 'b' | 'c'>>({ a: undefined, b: 2, c: 3 });
+    expectType<ConvertOptionalPart<T2, 'a' | 'b' | 'c'>>({
+      a: undefined,
+      b: undefined,
+      c: undefined,
+    });
+    expectType<ConvertOptionalPart<T2, 'a' | 'b' | 'c'>>({ a: undefined, b: 2, c: 3, d: 4, e: 5 });
+    expectType<ConvertOptionalPart<T2, 'a' | 'b' | 'c'>>({
+      a: undefined,
+      b: undefined,
+      c: undefined,
+      d: 4,
+      e: 5,
+    });
+
+    const v2 = { a: undefined, b: 2, c: 3, d: undefined, e: undefined };
+    // @ts-expect-error d 和 e 不可设置为 undefined
+    expectError<ConvertOptionalPart<T2, 'a' | 'b' | 'c'>>(v2);
   });
 });

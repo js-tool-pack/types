@@ -1,3 +1,9 @@
+## [0.0.9](https://github.com/js-tool-pack/types/compare/v0.0.8...v0.0.9) (2023-09-12)
+
+### Bug Fixes
+
+- **object:** 修复 exactOptionalPropertyTypes 会影响 ConvertOptionalPart 和 ConvertOptional 结果的问题 ([de1c623](https://github.com/js-tool-pack/types/commit/de1c62388b594370676cdad9528e99d3903ae005))
+
 ## [0.0.8](https://github.com/js-tool-pack/types/compare/v0.0.7...v0.0.8) (2023-09-12)
 
 ### Features

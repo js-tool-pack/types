@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>TransferPathOf | @tool-pack/types - v0.0.9</title><meta name="description" content="Documentation for @tool-pack/types"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><link rel="stylesheet" href="../assets/custom.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ConvertOptionalPart | @tool-pack/types - v0.0.9</title><meta name="description" content="Documentation for @tool-pack/types"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><link rel="stylesheet" href="../assets/custom.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -26,33 +26,29 @@
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb">
 <li><a href="../modules.html">@tool-pack/types</a></li>
-<li><a href="../modules/ObjectPath.html">ObjectPath</a></li>
-<li><a href="ObjectPath.TransferPathOf.html">TransferPathOf</a></li></ul>
-<h1>Type alias TransferPathOf&lt;T, K, S, NO_START, NO_START_PATH, PATH&gt;</h1></div>
-<div class="tsd-signature"><span class="tsd-kind-type-alias">Transfer<wbr/>Path<wbr/>Of</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">S</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">NO_START</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">NO_START_PATH</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">PATH</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-parameter">NO_START_PATH</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type tsd-kind-type-parameter">PATH</span><br/><span>    </span><span class="tsd-signature-symbol">? </span><span class="tsd-signature-type tsd-kind-type-parameter">K</span><br/><span>    </span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">PATH</span></div>
-<div class="tsd-comment tsd-typography"><p>如果转换后的路径跟PathOf的路径一样，就说明该路径是对的并返回原path,否则返回PathOf所返回的类型</p>
+<li><a href="../modules/Object.html">Object</a></li>
+<li><a href="Object.ConvertOptionalPart.html">ConvertOptionalPart</a></li></ul>
+<h1>Type alias ConvertOptionalPart&lt;T, K, OK&gt;</h1></div>
+<div class="tsd-signature"><span class="tsd-kind-type-alias">Convert<wbr/>Optional<wbr/>Part</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">OK</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">RequiredOptional</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Extract</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">OK</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type ">Omit</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Extract</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">OK</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography"><p>转换对象中部分可选属性为必选，并且原值类型加上<code>| undefined</code></p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span></h4></li>
+<h4><span class="tsd-kind-type-parameter">T</span></h4></li>
 <li>
-<h4><span class="tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">string</span></h4></li>
+<h4><span class="tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span></h4></li>
 <li>
-<h4><span class="tsd-kind-type-parameter">S</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">string</span></h4></li>
-<li>
-<h4><span class="tsd-kind-type-parameter">NO_START</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">string</span> = <a href="String.DotTrim.html" class="tsd-signature-type tsd-kind-type-alias">DotTrim</a><span class="tsd-signature-symbol">&lt;</span><a href="String.RemoveStrStart.html" class="tsd-signature-type tsd-kind-type-alias">RemoveStrStart</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4></li>
-<li>
-<h4><span class="tsd-kind-type-parameter">NO_START_PATH</span> = <a href="ObjectPath.TransferPath.html" class="tsd-signature-type tsd-kind-type-alias">TransferPath</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">NO_START</span><span class="tsd-signature-symbol">&gt;</span></h4></li>
-<li>
-<h4><span class="tsd-kind-type-parameter">PATH</span> = <a href="ObjectPath.PathOf.html" class="tsd-signature-type tsd-kind-type-alias">PathOf</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><a href="ObjectPath.TransferPath.html" class="tsd-signature-type tsd-kind-type-alias">TransferPath</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">NO_START</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></section>
+<h4><span class="tsd-kind-type-parameter">OK</span> = <a href="Object.OptionalKeys.html" class="tsd-signature-type tsd-kind-type-alias">OptionalKeys</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></section>
 <div class="tsd-comment tsd-typography">
-<h4>Example</h4><pre><code class="language-ts"><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">T</span><span class="hl-1"> = </span><span class="hl-2">TransferPathOf</span><span class="hl-1">&lt;{ </span><span class="hl-5">a</span><span class="hl-1">: </span><span class="hl-2">string</span><span class="hl-1"> }, </span><span class="hl-4">&#39;a&#39;</span><span class="hl-1">, </span><span class="hl-4">&#39;&#39;</span><span class="hl-1">&gt;; </span><span class="hl-3">// &#39;a&#39;</span><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">T1</span><span class="hl-1"> = </span><span class="hl-2">TransferPathOf</span><span class="hl-1">&lt;{ </span><span class="hl-5">a</span><span class="hl-1">: </span><span class="hl-2">string</span><span class="hl-1"> }, </span><span class="hl-4">&#39;obj.a&#39;</span><span class="hl-1">, </span><span class="hl-4">&#39;obj&#39;</span><span class="hl-1">&gt;; </span><span class="hl-3">// &#39;obj.a&#39;</span><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">T2</span><span class="hl-1"> = </span><span class="hl-2">TransferPathOf</span><span class="hl-1">&lt;{ </span><span class="hl-5">a</span><span class="hl-1">: { </span><span class="hl-5">b</span><span class="hl-1">: { </span><span class="hl-5">c</span><span class="hl-1">: </span><span class="hl-2">number</span><span class="hl-1"> } } }, </span><span class="hl-4">&#39;obj.b&#39;</span><span class="hl-1">, </span><span class="hl-4">&#39;obj&#39;</span><span class="hl-1">&gt;; </span><span class="hl-3">// &#39;a&#39;</span>
+<h4>See</h4><p><a href="Object.ConvertOptional.html" class="tsd-kind-type-alias">ConvertOptional</a></p>
+
+<h4>Example</h4><pre><code class="language-ts"><span class="hl-0">interface</span><span class="hl-1"> </span><span class="hl-2">T</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-5">a</span><span class="hl-1">?: </span><span class="hl-6">1</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">b</span><span class="hl-1">?: </span><span class="hl-6">2</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">c</span><span class="hl-1">: </span><span class="hl-6">3</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-5">ConvertOptionalPart</span><span class="hl-1">&lt;</span><span class="hl-8">T</span><span class="hl-1">, </span><span class="hl-4">&#39;a&#39;</span><span class="hl-1">&gt; </span><span class="hl-3">// { a: 1 | undefined; b?: 2; c: 3}</span><br/><span class="hl-3">// c 不是可选属性而被忽略</span><br/><span class="hl-5">ConvertOptionalPart</span><span class="hl-1">&lt;</span><span class="hl-8">T</span><span class="hl-1">, </span><span class="hl-4">&#39;a&#39;</span><span class="hl-1"> | </span><span class="hl-4">&#39;b&#39;</span><span class="hl-1"> | </span><span class="hl-4">&#39;c&#39;</span><span class="hl-1">&gt; </span><span class="hl-3">// { a: 1 | undefined; b: 2 | undefined; c: 3}</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/js-tool-pack/types/blob/71ecdb8/src/object-path.ts#L97">object-path.ts:97</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/js-tool-pack/types/blob/71ecdb8/src/object.ts#L298">object.ts:298</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -132,7 +128,7 @@
 <div>Str<wbr/>Repeat
 <div class="menu-item-desc">类似 String.prototype.repeat</div></div></a></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" data-key="Object"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/Object.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" open data-key="Object"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/Object.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Object
 <div class="menu-item-desc">对象相关类型工具</div></div></a></summary>
 <div class="tsd-accordion-details">
@@ -184,7 +180,7 @@
 <li><a href="Object.TupleToObj.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Tuple<wbr/>To<wbr/>Obj
 <div class="menu-item-desc">把元组转为对象，并用元组的元素作为对象的key</div></div></a></li>
-<li><a href="Object.ConvertOptionalPart.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="Object.ConvertOptionalPart.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Convert<wbr/>Optional<wbr/>Part
 <div class="menu-item-desc">转换对象中部分可选属性为必选，并且原值类型加上 `| undefined`</div></div></a></li>
 <li><a href="Object.ConvertOptional.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
@@ -203,7 +199,7 @@
 <div>SettableDOMProps
 <div class="menu-item-desc">获取所有可更改的HTMLElement属性组成的新type</div></div></a></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" open data-key="ObjectPath"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/ObjectPath.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" data-key="ObjectPath"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/ObjectPath.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Object<wbr/>Path
 <div class="menu-item-desc">对象路径类型工具</div></div></a></summary>
 <div class="tsd-accordion-details">
@@ -214,7 +210,7 @@
 <li><a href="ObjectPath.TransferPath.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Transfer<wbr/>Path
 <div class="menu-item-desc">路径类型转换</div></div></a></li>
-<li><a href="ObjectPath.TransferPathOf.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="ObjectPath.TransferPathOf.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Transfer<wbr/>Path<wbr/>Of
 <div class="menu-item-desc">如果转换后的路径跟PathOf的路径一样，就说明该路径是对的并返回原path,否则返回PathOf所返回的类型</div></div></a></li>
 <li><a href="ObjectPath.ValueMatchingPath.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>

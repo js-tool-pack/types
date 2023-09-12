@@ -274,7 +274,8 @@ export type TupleToObj<T extends ReadonlyArray<string | number>, V, E = null, V2
   [K in T[number]]?: K extends E ? V2 : V;
 };
 
-type RequiredOptional<T> = { [K in keyof T]-?: T[K] | undefined };
+// T 不转成 Required 的话会被 exactOptionalPropertyTypes 影响结果
+type RequiredOptional<T, R = Required<T>> = { [K in keyof R]-?: R[K] | undefined };
 /**
  * 转换对象中部分可选属性为必选，并且原值类型加上`| undefined`
  *

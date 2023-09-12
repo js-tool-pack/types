@@ -319,7 +319,4 @@ export type ConvertOptionalPart<T, K extends keyof T, OK = OptionalKeys<Pick<T, 
  * ConvertOptional<T, keyof T> // { a: 1 | undefined; b: 2 | undefined; c: 3 | undefined}
  *
  */
-export type ConvertOptional<T, OK = OptionalKeys<T>> = RequiredOptional<
-  Pick<T, Extract<keyof T, OK>>
-> &
-  Omit<T, Extract<keyof T, OK>>;
+export type ConvertOptional<T, OK = OptionalKeys<T>> = ConvertOptionalPart<T, never, OK>;

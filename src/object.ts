@@ -321,3 +321,12 @@ export type ConvertOptionalPart<T, K extends keyof T, OK = OptionalKeys<Pick<T, 
  *
  */
 export type ConvertOptional<T, OK = OptionalKeys<T>> = ConvertOptionalPart<T, never, OK>;
+
+/**
+ * 扁平化交叉类型
+ *
+ * @example
+ * type A = { a: 1 } & { b: 2 }; // {a:1} & {b:2}
+ * type B = FlattenIntersection<{ a: 1 } & { b: 2 }>; // {a:1; b:2}
+ */
+export type FlattenIntersection<T> = { [P in keyof T]: T[P] };

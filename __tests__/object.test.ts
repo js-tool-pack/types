@@ -18,11 +18,13 @@ import type {
   TupleToObj,
   ConvertOptionalPart,
   ConvertOptional,
+  FlattenIntersection,
 } from '../src';
 import * as console from 'console';
 
 const ab: 'a' | 'b' = Math.random() > 0.5 ? 'a' : 'b';
 const abc: 'a' | 'b' | 'c' = Math.random() > 0.5 ? 'a' : Math.random() > 0.5 ? 'b' : 'c';
+const Never = null as never;
 
 describe('object', () => {
   test('IfEquals', () => {
@@ -485,5 +487,10 @@ describe('object', () => {
       d: undefined,
       e: undefined,
     });
+  });
+
+  test('FlattenIntersection', () => {
+    expectType<FlattenIntersection<{ a: 1 } & { b: 2 }>>({ a: 1, b: 2 });
+    expectType<FlattenIntersection<{ a: 1 } & { a: 2 }>>(Never);
   });
 });

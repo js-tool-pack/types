@@ -1,3 +1,10 @@
+# [0.1.0](https://github.com/js-tool-pack/types/compare/v0.0.9...v0.1.0) (2023-09-17)
+
+### Features
+
+- **object:** 新增 FlattenIntersection 扁平化交叉类型 ([fb73e94](https://github.com/js-tool-pack/types/commit/fb73e94c53c814548f8fd9f47c5f7bd6b8606df0))
+- **object:** 新增 Mix 混合类型 ([3319847](https://github.com/js-tool-pack/types/commit/331984738d18f586e0dc338a3cc7804fb21ea458))
+
 ## [0.0.9](https://github.com/js-tool-pack/types/compare/v0.0.8...v0.0.9) (2023-09-12)
 
 ### Bug Fixes

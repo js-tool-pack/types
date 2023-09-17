@@ -330,3 +330,21 @@ export type ConvertOptional<T, OK = OptionalKeys<T>> = ConvertOptionalPart<T, ne
  * type B = FlattenIntersection<{ a: 1 } & { b: 2 }>; // {a:1; b:2}
  */
 export type FlattenIntersection<T> = { [P in keyof T]: T[P] };
+
+/**
+ * 混合类型
+ *
+ * 简单的可以直接用 '&'，但是如果有重复的 key 会变成 never，这时就需要操作一下了；而且这种方式显示的结果是计算后的，而不是 & 拼接起来的
+ *
+ * @example
+ *
+ * // &
+ * { a: 1; b: 2 } & { c: 3 } // { a: 1; b: 2 } & { c: 3 }
+ * { a: 1; b: 2 } & { b: 3 } // never
+ *
+ * // Mix
+ * type A = Mix<{ a: 1; b: 2 }, { c: 3 }>; // { a: 1; b: 2; c:3 }
+ * type B = Mix<{ a: 1; b: 2 }, { b: 3 }>; // { a: 1; b: 3 }
+ *
+ */
+export type Mix<A, B> = FlattenIntersection<Omit<A, keyof B> & B>;

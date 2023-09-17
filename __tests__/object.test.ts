@@ -19,6 +19,7 @@ import type {
   ConvertOptionalPart,
   ConvertOptional,
   FlattenIntersection,
+  Mix,
 } from '../src';
 import * as console from 'console';
 
@@ -492,5 +493,27 @@ describe('object', () => {
   test('FlattenIntersection', () => {
     expectType<FlattenIntersection<{ a: 1 } & { b: 2 }>>({ a: 1, b: 2 });
     expectType<FlattenIntersection<{ a: 1 } & { a: 2 }>>(Never);
+  });
+
+  test('Mix', () => {
+    interface A {
+      a: 1;
+      b: 2;
+    }
+    interface B {
+      b: 3;
+    }
+    expectType<Mix<A, B>>({ a: 1, b: 3 });
+    // @ts-expect-error
+    expectError<Mix<A, B>>({ a: 1, b: 2 });
+
+    // @ts-expect-error
+    expectError<A & B>({ a: 1, b: 3 });
+    // @ts-expect-error
+    expectError<A & B>({ a: 1, b: 2 });
+
+    expectType<A & B>(Never);
+
+    expectType<Mix<A, { c: 3 }>>({ a: 1, b: 2, c: 3 });
   });
 });

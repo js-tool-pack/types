@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>IsAny | @tool-pack/types - v0.2.0</title><meta name="description" content="Documentation for @tool-pack/types"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><link rel="stylesheet" href="../assets/custom.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Writeable | @tool-pack/types - v0.2.0</title><meta name="description" content="Documentation for @tool-pack/types"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><link rel="stylesheet" href="../assets/custom.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -26,11 +26,11 @@
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb">
 <li><a href="../modules.html">@tool-pack/types</a></li>
-<li><a href="../modules/Verify.html">Verify</a></li>
-<li><a href="Verify.IsAny.html">IsAny</a></li></ul>
-<h1>Type alias IsAny&lt;T&gt;</h1></div>
-<div class="tsd-signature"><span class="tsd-kind-type-alias">Is<wbr/>Any</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">1</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><br/><span>    </span><span class="tsd-signature-symbol">? </span><span class="tsd-signature-type">true</span><br/><span>    </span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span></div>
-<div class="tsd-comment tsd-typography"><p>判断类型是否是any</p>
+<li><a href="../modules/Object.html">Object</a></li>
+<li><a href="Object.Writeable.html">Writeable</a></li></ul>
+<h1>Type alias Writeable&lt;T&gt;</h1></div>
+<div class="tsd-signature"><span class="tsd-kind-type-alias">Writeable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/><span>    </span><span class="tsd-signature-symbol">-readonly </span><span class="tsd-signature-symbol">[</span><span class="tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">]</span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>把 Readonly 的对象或包含 readonly 属性的对象改为可写的对象</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
@@ -38,11 +38,11 @@
 <li>
 <h4><span class="tsd-kind-type-parameter">T</span></h4></li></ul></section>
 <div class="tsd-comment tsd-typography">
-<h4>Example</h4><pre><code class="language-ts"><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">T</span><span class="hl-1"> = </span><span class="hl-2">IsAny</span><span class="hl-1">&lt;</span><span class="hl-2">any</span><span class="hl-1">&gt;; </span><span class="hl-3">// true</span><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">T2</span><span class="hl-1"> = </span><span class="hl-2">IsAny</span><span class="hl-1">&lt;</span><span class="hl-2">number</span><span class="hl-1">&gt;; </span><span class="hl-3">// false</span><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">t3</span><span class="hl-1"> = </span><span class="hl-2">IsAny</span><span class="hl-1">&lt;{}&gt;; </span><span class="hl-3">// false</span><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">t4</span><span class="hl-1"> = </span><span class="hl-2">IsAny</span><span class="hl-1">&lt;</span><span class="hl-2">never</span><span class="hl-1">&gt;; </span><span class="hl-3">// false</span><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">t5</span><span class="hl-1"> = </span><span class="hl-2">IsAny</span><span class="hl-1">&lt;</span><span class="hl-2">undefined</span><span class="hl-1">&gt;; </span><span class="hl-3">// false</span><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">t6</span><span class="hl-1"> = </span><span class="hl-2">IsAny</span><span class="hl-1">&lt;</span><span class="hl-2">null</span><span class="hl-1">&gt;; </span><span class="hl-3">// false</span><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">t7</span><span class="hl-1"> = </span><span class="hl-2">IsAny</span><span class="hl-1">&lt;</span><span class="hl-2">unknown</span><span class="hl-1">&gt;; </span><span class="hl-3">// false</span>
+<h4>Example</h4><pre><code class="language-ts"><span class="hl-0">interface</span><span class="hl-1"> </span><span class="hl-2">Obj</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-0">readonly</span><span class="hl-1"> </span><span class="hl-5">a</span><span class="hl-1">: </span><span class="hl-6">1</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">b</span><span class="hl-1">: </span><span class="hl-6">2</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">T</span><span class="hl-1"> = </span><span class="hl-2">Writeable</span><span class="hl-1">&lt;</span><span class="hl-2">Obj</span><span class="hl-1">&gt;; </span><span class="hl-3">// {a: 1; b: 2;}</span><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">T2</span><span class="hl-1"> = </span><span class="hl-2">Readonly</span><span class="hl-1">&lt;</span><span class="hl-2">Obj</span><span class="hl-1">&gt;; </span><span class="hl-3">// {readonly a: 1; readonly b: 2;}</span><br/><span class="hl-0">type</span><span class="hl-1"> </span><span class="hl-2">T3</span><span class="hl-1"> = </span><span class="hl-2">Writeable</span><span class="hl-1">&lt;</span><span class="hl-2">T2</span><span class="hl-1">&gt;; </span><span class="hl-3">// {a: 1; b: 2;}</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/js-tool-pack/types/blob/7946d55/src/verify.ts#L31">verify.ts:31</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/js-tool-pack/types/blob/7946d55/src/object.ts#L367">object.ts:367</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -50,7 +50,7 @@
 <div>@tool-<wbr/>pack/types -<wbr/> v0.2.0</div></a>
 <ul class="tsd-small-nested-navigation">
 <li>
-<details class="tsd-index-accordion" open data-key="Verify"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/Verify.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" data-key="Verify"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/Verify.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Verify
 <div class="menu-item-desc">类型校验工具</div></div></a></summary>
 <div class="tsd-accordion-details">
@@ -58,7 +58,7 @@
 <li><a href="Verify.IsUnknown.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Is<wbr/>Unknown
 <div class="menu-item-desc">判断类型是否是unknown</div></div></a></li>
-<li><a href="Verify.IsAny.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="Verify.IsAny.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Is<wbr/>Any
 <div class="menu-item-desc">判断类型是否是any</div></div></a></li>
 <li><a href="Verify.IsUnion.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
@@ -122,7 +122,7 @@
 <div>Str<wbr/>Repeat
 <div class="menu-item-desc">类似 String.prototype.repeat</div></div></a></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" data-key="Object"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/Object.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" open data-key="Object"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/Object.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Object
 <div class="menu-item-desc">对象相关类型工具</div></div></a></summary>
 <div class="tsd-accordion-details">
@@ -186,7 +186,7 @@
 <li><a href="Object.Mix.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Mix
 <div class="menu-item-desc">混合类型</div></div></a></li>
-<li><a href="Object.Writeable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="Object.Writeable.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Writeable
 <div class="menu-item-desc">把 Readonly 的对象或包含 readonly 属性的对象改为可写的对象</div></div></a></li></ul></div></details></li>
 <li>

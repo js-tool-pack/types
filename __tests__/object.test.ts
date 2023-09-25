@@ -22,6 +22,7 @@ import type {
   Mix,
 } from '../src';
 import * as console from 'console';
+import { Writeable } from '../src';
 
 const ab: 'a' | 'b' = Math.random() > 0.5 ? 'a' : 'b';
 const abc: 'a' | 'b' | 'c' = Math.random() > 0.5 ? 'a' : Math.random() > 0.5 ? 'b' : 'c';
@@ -515,5 +516,27 @@ describe('object', () => {
     expectType<A & B>(Never);
 
     expectType<Mix<A, { c: 3 }>>({ a: 1, b: 2, c: 3 });
+  });
+
+  test('Writeable', () => {
+    interface A {
+      readonly a: number;
+      b: string;
+    }
+
+    const objR: A = { a: 1, b: 'b' };
+    // @ts-expect-error
+    objR.a = 2;
+
+    const objW: Writeable<A> = { a: 1, b: 'b' };
+    objW.a = 2;
+
+    type B = Readonly<A>;
+    const objR2: B = { a: 1, b: 'b' };
+    // @ts-expect-error
+    objR2.b = 'c';
+
+    const objW2: Writeable<B> = { a: 1, b: 'b' };
+    objW2.b = 'c';
   });
 });

@@ -348,3 +348,22 @@ export type FlattenIntersection<T> = { [P in keyof T]: T[P] };
  *
  */
 export type Mix<A, B> = FlattenIntersection<Omit<A, keyof B> & B>;
+
+/**
+ * 把 Readonly 的对象或包含 readonly 属性的对象改为可写的对象
+ *
+ * @example
+ *
+ * interface Obj {
+ *   readonly a: 1;
+ *   b: 2;
+ * }
+ *
+ * type T = Writeable<Obj>; // {a: 1; b: 2;}
+ * type T2 = Readonly<Obj>; // {readonly a: 1; readonly b: 2;}
+ * type T3 = Writeable<T2>; // {a: 1; b: 2;}
+ *
+ */
+export type Writeable<T> = {
+  -readonly [P in keyof T]: T[P];
+};

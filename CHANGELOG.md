@@ -1,3 +1,9 @@
+# [0.2.0](https://github.com/js-tool-pack/types/compare/v0.1.0...v0.2.0) (2023-09-25)
+
+### Features
+
+- **object:** 新增 Writeable ([78fc85f](https://github.com/js-tool-pack/types/commit/78fc85fffb8458e958f734eb5cd62cb4ead22c83))
+
 # [0.1.0](https://github.com/js-tool-pack/types/compare/v0.0.9...v0.1.0) (2023-09-17)
 
 ### Features

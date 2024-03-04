@@ -1,8 +1,9 @@
 import { expectError, expectType } from './utils';
-import type {
+import {
   BracketsToEmpty,
   DotTrim,
   EmptyNotDef,
+  PercentFormat,
   RemoveStrStart,
   StrRepeat,
   StrSplit,
@@ -138,5 +139,22 @@ describe('string', () => {
     // @ts-expect-error
     type T = StrRepeat<9, 2>; // 第一个参数限定了string，否则会报错
     expectType<T>('99');
+  });
+  test('PercentFormat', () => {
+    expectType<PercentFormat>('100%');
+    expectType<PercentFormat>('-100%');
+    expectType<PercentFormat>('1.1%');
+    expectType<PercentFormat>('-1.1%');
+
+    // @ts-expect-error
+    expectError<PercentFormat>('%');
+    // @ts-expect-error
+    expectError<PercentFormat>('a%');
+    // @ts-expect-error
+    expectError<PercentFormat>('-a%');
+    // @ts-expect-error
+    expectError<PercentFormat>('100');
+    // @ts-expect-error
+    expectError<PercentFormat>('-100');
   });
 });

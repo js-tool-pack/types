@@ -129,3 +129,9 @@ export type StrSplit<T, D extends string = '.'> = T extends `${infer First}${D}$
  *
  */
 export type StrRepeat<T extends string, R extends number> = TupleJoin<Tuple<T, R>, ''>;
+
+type P = `${number}%`;
+/**
+ * 百分比格式
+ */
+export type PercentFormat = P | `-${P}` | `${number}.${P}` | `-${number}.${P}`;

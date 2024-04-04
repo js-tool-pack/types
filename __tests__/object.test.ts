@@ -1,5 +1,5 @@
 import { expectError, expectType } from './utils';
-import type {
+import {
   CheckDuplicateKey,
   DuplicateKeys,
   IfEquals,
@@ -20,6 +20,7 @@ import type {
   ConvertOptional,
   FlattenIntersection,
   Mix,
+  ReverseObject,
 } from '../src';
 import * as console from 'console';
 import { Writeable } from '../src';
@@ -538,5 +539,15 @@ describe('object', () => {
 
     const objW2: Writeable<B> = { a: 1, b: 'b' };
     objW2.b = 'c';
+  });
+
+  test('ReverseObject', () => {
+    expectType<ReverseObject<{ a: 1; b: 2; c: 3 }>>({ 1: 'a', 2: 'b', 3: 'c' });
+    // @ts-expect-error
+    expectError<ReverseObject<{ a: 1; b: 2; c: 3 }>>({ a: 1, b: 2, c: 3 });
+    // @ts-expect-error
+    expectError<ReverseObject<{ a: 1; b: 2; c: 3 }>>({ 1: 'a', 2: 'b' });
+    // @ts-expect-error
+    expectError<ReverseObject<{ a: 1; b: 2; c: 3 }>>({ 0: 1, 1: 'a', 2: 'b' });
   });
 });

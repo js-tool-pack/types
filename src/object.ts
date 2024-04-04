@@ -367,3 +367,14 @@ export type Mix<A, B> = FlattenIntersection<Omit<A, keyof B> & B>;
 export type Writeable<T> = {
   -readonly [P in keyof T]: T[P];
 };
+
+/**
+ * 反转对象的 key 和 value
+ *
+ * @example
+ * ReverseObject<{ a: 1; b: 2; c: 3 }>; // { 1: 'a'; 2: 'b'; 3: 'c' };
+ */
+export type ReverseObject<T extends Record<any, any>> = {
+  // 在索引中用了 as，相当于 K 仍然是 keyof T，但新对象的 key 是 T[K]
+  [K in keyof T as T[K]]: K;
+};

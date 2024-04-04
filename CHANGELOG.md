@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/js-tool-pack/types/compare/v0.2.0...v0.2.1) (2024-04-04)
+
+### Features
+
+- **object:** 新增 ReverseObject 反转对象的 key 和 value ([c7fda4a](https://github.com/js-tool-pack/types/commit/c7fda4a9da4c3761adbbdb55a24616a5bad207c8))
+- **string:** 新增 PercentFormat ([df6f271](https://github.com/js-tool-pack/types/commit/df6f2714f97bc5141861329585866b72657221bc))
+
 # [0.2.0](https://github.com/js-tool-pack/types/compare/v0.1.0...v0.2.0) (2023-09-25)
 
 ### Features

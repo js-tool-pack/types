@@ -1,3 +1,9 @@
+## [0.2.2-beta.1](https://github.com/js-tool-pack/types/compare/v0.2.1...v0.2.2-beta.1) (2024-05-02)
+
+### Bug Fixes
+
+- 在 5.0 后不识别类型导入 ([1a1e8f5](https://github.com/js-tool-pack/types/commit/1a1e8f5b4954dfb7fff33e97c0fcd306b1754966))
+
 ## [0.2.1](https://github.com/js-tool-pack/types/compare/v0.2.0...v0.2.1) (2024-04-04)
 
 ### Features

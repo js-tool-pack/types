@@ -98,9 +98,13 @@
     ".": {
       "import": {
         "node": "./dist/types.cjs.js",
-        "default": "./dist/types.esm-bundler.js"
+        "default": "./dist/types.esm-bundler.js",
+        "types": "./dist/types.d.ts"
       },
-      "require": "./dist/types.cjs.js"
+      "require": {
+        "default": "./dist/types.cjs.js",
+        "types": "./dist/types.d.ts"
+      }
     }
   },
   "buildOptions": {

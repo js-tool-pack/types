@@ -1,3 +1,5 @@
+## [0.2.2](https://github.com/js-tool-pack/types/compare/v0.2.2-beta.1...v0.2.2) (2024-05-04)
+
 ## [0.2.2-beta.1](https://github.com/js-tool-pack/types/compare/v0.2.1...v0.2.2-beta.1) (2024-05-02)
 
 ### Bug Fixes

@@ -1,6 +1,6 @@
 {
   "name": "@tool-pack/types",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "packageManager": "pnpm@7.1.0",
   "description": "🛠 typescript custom type alias | typescript 自定义类型",
   "scripts": {

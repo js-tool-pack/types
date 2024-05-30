@@ -1,3 +1,9 @@
+# [0.3.0](https://github.com/js-tool-pack/types/compare/v0.2.2...v0.3.0) (2024-05-30)
+
+### Bug Fixes
+
+- 修复 exports 顺序在某些打包工具中 default 不在最后会报错的问题 ([1295dbd](https://github.com/js-tool-pack/types/commit/1295dbd1429c06ee8524185bad7d4b81fd92cf27))
+
 ## [0.2.2](https://github.com/js-tool-pack/types/compare/v0.2.2-beta.1...v0.2.2) (2024-05-04)
 
 ## [0.2.2-beta.1](https://github.com/js-tool-pack/types/compare/v0.2.1...v0.2.2-beta.1) (2024-05-02)

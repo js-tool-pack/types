@@ -1,14 +1,14 @@
-import * as path from 'path';
+import { getGitUrl, rootDir, cmdGet } from './utils';
+import { setRepo } from './set-repo';
 import { prompt } from 'enquirer';
 import * as semver from 'semver';
+import * as path from 'path';
 import chalk from 'chalk';
 import * as fs from 'fs';
-import { setRepo } from './set-repo';
-import { cmdGet, getGitUrl, rootDir } from './utils';
 
 export enum RepoType {
-  mono = 'mono',
   multi = 'multi',
+  mono = 'mono',
 }
 
 const rootPath = rootDir();
@@ -16,42 +16,38 @@ const rootPkgPath = path.resolve(rootPath, 'package.json');
 const rootPkgJson = require(rootPkgPath);
 
 export interface Config {
-  name: string;
   description: string;
-  author: string;
+  repoType: RepoType;
   keywords: string;
-  git: string;
   version: string;
   license: string;
-  repoType: RepoType;
+  author: string;
+  name: string;
+  git: string;
 }
 
 async function getConfig() {
   const initConfig: Config = {
-    name: path.basename(rootPath),
-    description: rootPkgJson.description,
-    author: cmdGet('git config user.name'),
     keywords: rootPkgJson.keywords.join(','),
-    git: getGitUrl(),
-    version: '0.0.0',
+    author: cmdGet('git config user.name'),
+    description: rootPkgJson.description,
+    name: path.basename(rootPath),
     license: rootPkgJson.license,
     repoType: RepoType.multi,
+    git: getGitUrl(),
+    version: '0.0.0',
   };
 
   const reply = await prompt<Config>([
     // 1.获取项目名称
     {
-      type: 'input',
-      name: 'name',
       initial: initConfig.name,
       message: '输入项目名称：',
+      type: 'input',
+      name: 'name',
     },
     // 2.获取版本号version
     {
-      type: 'input',
-      name: 'version',
-      initial: initConfig.version,
-      message: '输入版本号(version)：',
       validate(value) {
         // 校验版本号
         if (!semver.valid(value)) {
@@ -59,42 +55,46 @@ async function getConfig() {
         }
         return true;
       },
+      initial: initConfig.version,
+      message: '输入版本号(version)：',
+      name: 'version',
+      type: 'input',
     },
     // 3.获取description
     {
-      type: 'input',
-      name: 'description',
       initial: initConfig.description,
       message: '输入项目描述(description)：',
+      name: 'description',
+      type: 'input',
     },
     // 4.获取keywords
     {
-      type: 'input',
-      name: 'keywords',
       initial: initConfig.keywords,
       message: '输入关键词(keywords)：',
+      name: 'keywords',
+      type: 'input',
     },
     // 5.获取author
     {
-      type: 'input',
-      name: 'author',
       initial: initConfig.author,
       message: '输入作者(author)：',
+      name: 'author',
+      type: 'input',
     },
     // 6.获取license
     {
-      type: 'input',
-      name: 'license',
       initial: initConfig.license,
       message: '输入license：',
+      name: 'license',
+      type: 'input',
     },
     // 7.repo类型
     {
-      type: 'select',
-      name: 'repoType',
+      choices: [{ name: RepoType.mono }, { name: RepoType.multi }],
       initial: RepoType.multi as any,
       message: '选择repo类型：',
-      choices: [{ name: RepoType.mono }, { name: RepoType.multi }],
+      name: 'repoType',
+      type: 'select',
     },
   ]);
 
@@ -115,11 +115,11 @@ async function getConfig() {
 async function setup() {
   try {
     const { start } = await prompt<{ start: boolean }>({
-      type: 'confirm',
-      name: 'start',
       message: '是否开始初始化？',
+      type: 'confirm',
       initial: false,
       required: true,
+      name: 'start',
     });
     if (!start) return;
 

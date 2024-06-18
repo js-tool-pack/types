@@ -1,5 +1,5 @@
+import type { IsUnknown, IsUnion, IsAny } from '../src/';
 import { expectError, expectType } from './utils';
-import type { IsUnknown, IsAny, IsUnion } from '../src/';
 
 describe('verify', function () {
   test('IsUnknown', () => {
@@ -47,7 +47,7 @@ describe('verify', function () {
   test('IsUnion', () => {
     expectType<IsUnion<{ a: number } | { b: string }>>(true);
     expectType<IsUnion<boolean>>(true);
-    expectType<IsUnion<true | false>>(true);
+    expectType<IsUnion<false | true>>(true);
     expectType<IsUnion<false>>(false);
     expectType<IsUnion<true>>(false);
     expectType<IsUnion<{ a: number } & { b: string }>>(false);

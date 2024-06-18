@@ -2,24 +2,18 @@
 
 /**
  * 判断两种类型是否相等，如果X===Y返回A，否则返回B
- *
  * @example
  * type T = IfEquals<{}, {}, true, false>; // true
  * type T2 = IfEquals<{ a: string }, {}, true, false>; // false
  * type T3 = IfEquals<true, false, 'a', 'b'>; // 'b'
  * type T4 = IfEquals<1, 2, 1, 2>; // 2
  * type T5 = IfEquals<1, 1, 'a', 'b'>; // 'a'
- *
  */
-export type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X ? 1 : 2) extends <
-  T,
->() => T extends Y ? 1 : 2
-  ? A
-  : B;
+export type IfEquals<X, Y, A = X, B = never> =
+  (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
 
 /**
  * 与IfEquals返回相反的答案，如果X===Y返回B，否则返回A
- *
  * @example
  * type T = IfEqualsReverse<{}, {}, true, false>; // false
  * type T2 = IfEqualsReverse<{ a: string }, {}, true, false>; // true
@@ -33,7 +27,6 @@ export type IfEqualsReverse<X, Y, A = X, B = never> = IfEquals<X, Y, B, A>;
  * 找出readonly属性
  *
  * 跟WritableKeys相反
- *
  * @example
  * type T = ReadonlyKeys<{ readonly a: number; b: string; readonly c: boolean }>; // 'a'|'c'
  */
@@ -45,7 +38,6 @@ export type ReadonlyKeys<T> = {
  * 找出非readonly属性
  *
  * 跟ReadonlyKeys相反
- *
  * @example
  * type T = WritableKeys<{ readonly a: number; b: string; readonly c: boolean; d: string }>; // 'b'|'d'
  */
@@ -57,10 +49,8 @@ export type WritableKeys<T> = {
  * 找出required属性
  *
  * 跟OptionalKeys相反
- *
  * @example
  * type T = RequiredKeys<{ a: string; b?: number; c: boolean }>; // 'a'|'c'
- *
  */
 export type RequiredKeys<T> = {
   [K in keyof T]-?: {} extends { [P in K]: T[K] } ? never : K;
@@ -68,7 +58,6 @@ export type RequiredKeys<T> = {
 
 /**
  * 找出optional属性
- *
  * @example
  * type T = OptionalKeys<{ a: string; b?: number; c: boolean }>; // 'b'
  */
@@ -78,7 +67,6 @@ export type OptionalKeys<T> = {
 
 /**
  * pick所有Required属性组成新type
- *
  * @example
  * interface I {
  *   a: string;
@@ -93,7 +81,6 @@ export type RequiredOnly<T> = Pick<T, RequiredKeys<T>>;
 
 /**
  * pick所有public属性组成新的type
- *
  * @example
  * class Foo {
  *   public a = '';
@@ -129,25 +116,29 @@ type CheckDuplicateKey2<A, B> = DuplicateKeys<A, B> extends never ? A & B : Dupl
 /**
  * @see CheckDuplicateKey2
  */
-type CheckDuplicateKey3<A, B, C> = CheckDuplicateKey2<A, B> extends A & B
-  ? CheckDuplicateKey2<C, CheckDuplicateKey2<A, B>>
-  : CheckDuplicateKey2<A, B>;
+type CheckDuplicateKey3<A, B, C> =
+  CheckDuplicateKey2<A, B> extends A & B
+    ? CheckDuplicateKey2<C, CheckDuplicateKey2<A, B>>
+    : CheckDuplicateKey2<A, B>;
 /**
  * @see CheckDuplicateKey2
  */
-type CheckDuplicateKey4<A, B, C, D> = CheckDuplicateKey3<A, B, C> extends A & B & C
-  ? CheckDuplicateKey2<D, CheckDuplicateKey3<A, B, C>>
-  : CheckDuplicateKey3<A, B, C>;
+type CheckDuplicateKey4<A, B, C, D> =
+  CheckDuplicateKey3<A, B, C> extends A & B & C
+    ? CheckDuplicateKey2<D, CheckDuplicateKey3<A, B, C>>
+    : CheckDuplicateKey3<A, B, C>;
 /**
  * @see CheckDuplicateKey2
  */
-type CheckDuplicateKey5<A, B, C, D, E> = CheckDuplicateKey4<A, B, C, D> extends A & B & C & D
-  ? CheckDuplicateKey2<E, CheckDuplicateKey4<A, B, C, D>>
-  : CheckDuplicateKey4<A, B, C, D>;
+type CheckDuplicateKey5<A, B, C, D, E> =
+  CheckDuplicateKey4<A, B, C, D> extends A & B & C & D
+    ? CheckDuplicateKey2<E, CheckDuplicateKey4<A, B, C, D>>
+    : CheckDuplicateKey4<A, B, C, D>;
 
 /**
  * 排查最多5个最少2个Object中是否有重复的key name，有就返回重复的key name集合，否则返回合并之后的Object
- * @tips 多个object key重复时不一定会全部显示重复的key name出来，可能会去掉一个重复的key才会出现下一个重复的
+ *
+ * tips： 多个object key重复时不一定会全部显示重复的key name出来，可能会去掉一个重复的key才会出现下一个重复的
  * @example
  * interface ABC {
  *   a: string;
@@ -196,7 +187,6 @@ export type UrlParams<T, R = {}> = T extends `${infer K}=${infer V}${infer Other
  * Readonly深度递归版
  * ---
  * 官方提供的Readonly只有一层，类似Object.assign
- *
  * @example
  *
  * interface A {
@@ -229,7 +219,6 @@ export type DeepReadonly<T> = {
 
 /**
  * 把一个对象选中的key从Partial改为Required
- *
  * @example
  *
  * interface O {
@@ -239,15 +228,13 @@ export type DeepReadonly<T> = {
  * }
  *
  * RequiredPart<O, 'a'>; // { a: number; b?: number; c: number; }
- *
  */
-export type RequiredPart<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+export type RequiredPart<T, K extends keyof T> = Required<Pick<T, K>> & Omit<T, K>;
 
 /**
  * 把一个对象选中的key从Required改为Partial
  *
  * 功能与RequiredPart相反
- *
  * @example
  *
  * interface O {
@@ -257,13 +244,11 @@ export type RequiredPart<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K
  * }
  *
  * RequiredPart<O, 'a' | 'c'>; // { a?: number; b: number; c?: number; }
- *
  */
-export type PartialPart<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+export type PartialPart<T, K extends keyof T> = Partial<Pick<T, K>> & Omit<T, K>;
 
 /**
  * 把元组转为对象，并用元组的元素作为对象的key
- *
  * @example
  *
  * const a = ['a', 'b', 'c', 1, 2, 3] as const;
@@ -275,12 +260,10 @@ export type TupleToObj<T extends ReadonlyArray<string | number>, V, E = null, V2
 };
 
 // T 不转成 Required 的话会被 exactOptionalPropertyTypes 影响结果
-type RequiredOptional<T, R = Required<T>> = { [K in keyof R]-?: R[K] | undefined };
+type RequiredOptional<T, R = Required<T>> = { [K in keyof R]-?: undefined | R[K] };
 /**
  * 转换对象中部分可选属性为必选，并且原值类型加上`| undefined`
- *
  * @see {@link ConvertOptional}
- *
  * @example
  *
  * interface T {
@@ -292,8 +275,6 @@ type RequiredOptional<T, R = Required<T>> = { [K in keyof R]-?: R[K] | undefined
  * ConvertOptionalPart<T, 'a'> // { a: 1 | undefined; b?: 2; c: 3}
  * // c 不是可选属性而被忽略
  * ConvertOptionalPart<T, 'a' | 'b' | 'c'> // { a: 1 | undefined; b: 2 | undefined; c: 3}
- *
- *
  */
 export type ConvertOptionalPart<T, K extends keyof T, OK = OptionalKeys<Pick<T, K>>> =
   // 挑选可选属性并转为对应类型加 | undefined
@@ -303,9 +284,7 @@ export type ConvertOptionalPart<T, K extends keyof T, OK = OptionalKeys<Pick<T, 
 
 /**
  * 转换对象中所有可选属性为必选，并且原值类型加上`| undefined`
- *
  * @see {@link ConvertOptionalPart}
- *
  * @example
  *
  * interface T {
@@ -318,13 +297,11 @@ export type ConvertOptionalPart<T, K extends keyof T, OK = OptionalKeys<Pick<T, 
  *
  * // 强制转换所有
  * ConvertOptional<T, keyof T> // { a: 1 | undefined; b: 2 | undefined; c: 3 | undefined}
- *
  */
 export type ConvertOptional<T, OK = OptionalKeys<T>> = ConvertOptionalPart<T, never, OK>;
 
 /**
  * 扁平化交叉类型
- *
  * @example
  * type A = { a: 1 } & { b: 2 }; // {a:1} & {b:2}
  * type B = FlattenIntersection<{ a: 1 } & { b: 2 }>; // {a:1; b:2}
@@ -335,7 +312,6 @@ export type FlattenIntersection<T> = { [P in keyof T]: T[P] };
  * 混合类型
  *
  * 简单的可以直接用 '&'，但是如果有重复的 key 会变成 never，这时就需要操作一下了；而且这种方式显示的结果是计算后的，而不是 & 拼接起来的
- *
  * @example
  *
  * // &
@@ -345,13 +321,11 @@ export type FlattenIntersection<T> = { [P in keyof T]: T[P] };
  * // Mix
  * type A = Mix<{ a: 1; b: 2 }, { c: 3 }>; // { a: 1; b: 2; c:3 }
  * type B = Mix<{ a: 1; b: 2 }, { b: 3 }>; // { a: 1; b: 3 }
- *
  */
 export type Mix<A, B> = FlattenIntersection<Omit<A, keyof B> & B>;
 
 /**
  * 把 Readonly 的对象或包含 readonly 属性的对象改为可写的对象
- *
  * @example
  *
  * interface Obj {
@@ -362,7 +336,6 @@ export type Mix<A, B> = FlattenIntersection<Omit<A, keyof B> & B>;
  * type T = Writeable<Obj>; // {a: 1; b: 2;}
  * type T2 = Readonly<Obj>; // {readonly a: 1; readonly b: 2;}
  * type T3 = Writeable<T2>; // {a: 1; b: 2;}
- *
  */
 export type Writeable<T> = {
   -readonly [P in keyof T]: T[P];
@@ -370,7 +343,6 @@ export type Writeable<T> = {
 
 /**
  * 反转对象的 key 和 value
- *
  * @example
  * ReverseObject<{ a: 1; b: 2; c: 3 }>; // { 1: 'a'; 2: 'b'; 3: 'c' };
  */

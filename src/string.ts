@@ -1,4 +1,4 @@
-import type { Tuple, TupleJoin, TupleShift } from './tuple';
+import type { TupleShift, TupleJoin, Tuple } from './tuple';
 
 /**
  * 类似字符串trim方法，只是不是trim空格，而是trim点号
@@ -12,7 +12,6 @@ export type DotTrim<T> = T extends `${infer U}.` | `.${infer U}` ? DotTrim<U> : 
 
 /**
  * 如果T为空则返回空，不为空返回默认
- *
  * @example
  * type ed = EmptyNotDef<'', '123'>; // ""
  * type ed2 = EmptyNotDef<'123', '333'>; // 333
@@ -21,7 +20,6 @@ export type EmptyNotDef<T, D> = T extends '' ? T : D;
 
 /**
  * []转为''
- *
  * @example
  * type bte = BracketsToEmpty<'[][][]'>; // ""
  */
@@ -29,7 +27,6 @@ export type BracketsToEmpty<T> = T extends `[]${infer U}` ? BracketsToEmpty<U> :
 
 /**
  * 移除S中开头的START 相当于S.replace(new RegExp(`^${Start}`), "");
- *
  * @example
  * type rss1 = RemoveStrStart<'anyScript', 'any'>; // Script
  * type rss2 = RemoveStrStart<'anyScript', 'Any'>; // anyScript
@@ -81,7 +78,6 @@ export type ToCamelCase<
 
 /**
  * 把模板字符串类型分割为元组
- *
  * @example
  *
  * ```ts
@@ -100,12 +96,11 @@ export type StrSplitWithNumber<
     ? [number, ...StrSplitWithNumber<Rest>]
     : [First, ...StrSplitWithNumber<Rest>]
   : T extends `${number}`
-  ? [number]
-  : [T];
+    ? [number]
+    : [T];
 
 /**
  * 字符串分割
- *
  * @example
  *
  * ```ts
@@ -122,11 +117,9 @@ export type StrSplit<T, D extends string = '.'> = T extends `${infer First}${D}$
 
 /**
  * 类似 String.prototype.repeat
- *
  * @example
  *
  * StrRepeat<'123', 2>; // '123123'
- *
  */
 export type StrRepeat<T extends string, R extends number> = TupleJoin<Tuple<T, R>, ''>;
 
@@ -134,4 +127,4 @@ type P = `${number}%`;
 /**
  * 百分比格式
  */
-export type PercentFormat = P | `-${P}` | `${number}.${P}` | `-${number}.${P}`;
+export type PercentFormat = `-${number}.${P}` | `${number}.${P}` | `-${P}` | P;

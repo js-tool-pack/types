@@ -5,7 +5,6 @@ type IsUnknownLike<T> = [keyof T] extends [never] ? (never extends T ? true : fa
 
 /**
  * 判断类型是否是unknown
- *
  * @example
  * type T = IsUnknown<unknown>; // true
  * type T2 = IsUnknown<any>; // false
@@ -17,7 +16,6 @@ export type IsUnknown<T> = IsUnknownExtend<T, IsUnknownLike<T>>;
 
 /**
  * 判断类型是否是any
- *
  * @example
  * type T = IsAny<any>; // true
  * type T2 = IsAny<number>; // false
@@ -26,7 +24,6 @@ export type IsUnknown<T> = IsUnknownExtend<T, IsUnknownLike<T>>;
  * type t5 = IsAny<undefined>; // false
  * type t6 = IsAny<null>; // false
  * type t7 = IsAny<unknown>; // false
- *
  */
 export type IsAny<T> = 0 extends 1 & T ? true : false;
 // export type IsAny<T> = IsUnknownExtend<T, AntiBool<IsUnknownLike<T>>>;
@@ -35,7 +32,6 @@ export type IsAny<T> = 0 extends 1 & T ? true : false;
  * 判断类型是否是union
  *
  * 注意: boolean也是union // 参考文章：https://zhuanlan.zhihu.com/p/469912347
- *
  * @example
  * type T = IsUnion<{ a: number } | { b: string }>; // true
  * type T1 = IsUnion<boolean>; // true
@@ -43,7 +39,6 @@ export type IsAny<T> = 0 extends 1 & T ? true : false;
  * type T3 = IsUnion<any>; // false
  * type T4 = IsUnion<unknown>; // false
  * type T5 = IsUnion<void>; // false
- *
  */
 export type IsUnion<T, U extends T = T> =
   /*

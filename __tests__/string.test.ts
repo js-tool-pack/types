@@ -1,16 +1,16 @@
-import { expectError, expectType } from './utils';
-import {
-  BracketsToEmpty,
-  DotTrim,
-  EmptyNotDef,
-  PercentFormat,
-  RemoveStrStart,
-  StrRepeat,
-  StrSplit,
+import type {
   StrSplitWithNumber,
+  BracketsToEmpty,
+  RemoveStrStart,
+  PercentFormat,
+  EmptyNotDef,
   StrTemplate,
   ToCamelCase,
+  StrRepeat,
+  StrSplit,
+  DotTrim,
 } from '../src';
+import { expectError, expectType } from './utils';
 
 describe('string', () => {
   test('DotTrim', () => {

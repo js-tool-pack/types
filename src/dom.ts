@@ -10,6 +10,6 @@ export type SettableDOMStyle = Partial<
 /**
  * 获取所有可更改的HTMLElement属性组成的新type
  */
-export type SettableDOMProps<R extends HTMLElement> = { style?: SettableDOMStyle } & Partial<
-  Omit<R, 'style' | ReadonlyKeys<R>>
->;
+export type SettableDOMProps<R extends HTMLElement> = Partial<
+  Omit<R, ReadonlyKeys<R> | 'style'>
+> & { style?: SettableDOMStyle };

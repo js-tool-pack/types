@@ -1,12 +1,12 @@
-import { expectError, expectType } from './utils';
 import type {
-  PathOf,
-  TransferPath,
-  TransferPathOf,
-  TypeOfPath,
   ValueMatchingPath,
+  TransferPathOf,
+  TransferPath,
+  TypeOfPath,
   PathUnion,
+  PathOf,
 } from '../src';
+import { expectError, expectType } from './utils';
 const ab: 'a' | 'b' = Math.random() > 0.5 ? 'a' : 'b';
 describe('object-path', function () {
   test('TypeOfPath', () => {
@@ -113,16 +113,16 @@ describe('object-path', function () {
     expectError<PathUnion<{ a: number }>>('a' as 'a' | 'b');
     expectType<PathUnion<{ a: number; b: string }>>('a' as 'a' | 'b');
 
-    type T = PathUnion<{ a: number; b: string; bb: { c: string; cc: { d: string } } }>;
-    expectType<T>('a' as 'a' | 'b' | 'bb' | 'bb.c' | 'bb.cc' | 'bb.cc.d');
+    type T = PathUnion<{ bb: { cc: { d: string }; c: string }; a: number; b: string }>;
+    expectType<T>('a' as 'bb.cc.d' | 'bb.cc' | 'bb.c' | 'bb' | 'a' | 'b');
 
     type T3 = PathUnion<{
+      b: { cc: { dd: string }; c: boolean };
+      bb: { cc: { d: string }; c: string };
       a: number;
-      b: { c: boolean; cc: { dd: string } };
-      bb: { c: string; cc: { d: string } };
     }>;
     expectType<T3>(
-      'a' as 'a' | 'b' | 'b.c' | 'b.cc' | 'b.cc.dd' | 'bb' | 'bb.c' | 'bb.cc' | 'bb.cc.d',
+      'a' as 'b.cc.dd' | 'bb.cc.d' | 'bb.cc' | 'b.cc' | 'bb.c' | 'b.c' | 'bb' | 'a' | 'b',
     );
   });
 });

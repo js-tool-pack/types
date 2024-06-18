@@ -1,29 +1,29 @@
-import { expectError, expectType } from './utils';
-import {
-  CheckDuplicateKey,
-  DuplicateKeys,
-  IfEquals,
-  IfEqualsReverse,
+import type {
   OmitFirstParameters,
+  ConvertOptionalPart,
+  FlattenIntersection,
+  CheckDuplicateKey,
+  IfEqualsReverse,
+  ConvertOptional,
+  DuplicateKeys,
+  ReverseObject,
   OptionalKeys,
-  PublicOnly,
   ReadonlyKeys,
   RequiredKeys,
   RequiredOnly,
-  UrlParams,
   WritableKeys,
   DeepReadonly,
   RequiredPart,
   PartialPart,
+  PublicOnly,
   TupleToObj,
-  ConvertOptionalPart,
-  ConvertOptional,
-  FlattenIntersection,
+  UrlParams,
+  IfEquals,
   Mix,
-  ReverseObject,
 } from '../src';
+import { expectError, expectType } from './utils';
+import type { Writeable } from '../src';
 import * as console from 'console';
-import { Writeable } from '../src';
 
 const ab: 'a' | 'b' = Math.random() > 0.5 ? 'a' : 'b';
 const abc: 'a' | 'b' | 'c' = Math.random() > 0.5 ? 'a' : Math.random() > 0.5 ? 'b' : 'c';
@@ -65,7 +65,7 @@ describe('object', () => {
     expectError<T>(9);
   });
   test('ReadonlyKeys', () => {
-    type T = ReadonlyKeys<{ readonly a: number; b: string; readonly c: boolean }>; // 'a'|'c'
+    type T = ReadonlyKeys<{ readonly c: boolean; readonly a: number; b: string }>; // 'a'|'c'
 
     expectType<T>('a');
     expectType<T>('c');
@@ -75,7 +75,7 @@ describe('object', () => {
     expectError<T>('d');
   });
   test('WritableKeys', () => {
-    type T = WritableKeys<{ readonly a: number; b: string; readonly c: boolean; d: string }>; // 'b'|'d'
+    type T = WritableKeys<{ readonly c: boolean; readonly a: number; b: string; d: string }>; // 'b'|'d'
     expectType<T>('b');
     expectType<T>('d');
     // @ts-expect-error
@@ -84,7 +84,7 @@ describe('object', () => {
     expectError<T>('c');
   });
   test('RequiredKeys', () => {
-    type T = RequiredKeys<{ a: string; b?: number; c: boolean }>; // 'a'|'c'
+    type T = RequiredKeys<{ b?: number; c: boolean; a: string }>; // 'a'|'c'
     expectType<T>('a');
     expectType<T>('c');
     // @ts-expect-error
@@ -93,7 +93,7 @@ describe('object', () => {
     expectError<T>('d');
   });
   test('RequiredKeys', () => {
-    type T = OptionalKeys<{ a: string; b?: number; c: boolean }>; // 'b'
+    type T = OptionalKeys<{ b?: number; c: boolean; a: string }>; // 'b'
     expectType<T>('b');
     // @ts-expect-error
     expectError<T>('a');
@@ -102,25 +102,25 @@ describe('object', () => {
   });
   test('RequiredOnly', () => {
     interface I {
-      a: string;
+      c: undefined | boolean;
       b?: number;
-      c: boolean | undefined;
+      a: string;
     }
     type T = RequiredOnly<I>; // {a: string; c: boolean | undefined}
     type T2 = OptionalKeys<I>; // "b"
-    expectType<T>({ a: '', c: undefined });
-    expectType<T>({ a: '', c: true });
+    expectType<T>({ c: undefined, a: '' });
+    expectType<T>({ c: true, a: '' });
     expectType<T2>('b');
     // @ts-expect-error
     expectError<T>({ a: '', c: 1 });
     // @ts-expect-error
-    expectError<T>({ a: 1, c: false });
+    expectError<T>({ c: false, a: 1 });
   });
   test('PublicOnly', () => {
     class Foo {
-      public a = '';
-      protected b = 2;
       private c = false;
+      protected b = 2;
+      public a = '';
 
       constructor() {
         console.log(this.c);
@@ -224,26 +224,26 @@ describe('object', () => {
   });
   test('DeepReadonly', () => {
     interface A {
-      a: number;
-      b: string;
       c: {
         d: boolean;
         f: string;
       };
+      a: number;
+      b: string;
     }
 
     type B = DeepReadonly<A>;
 
     interface C {
-      readonly a: number;
-      readonly b: string;
       readonly c: DeepReadonly<{
         d: boolean;
         f: string;
       }>;
+      readonly a: number;
+      readonly b: string;
     }
 
-    const b: B = { a: 1, b: '', c: { d: true, f: '' } };
+    const b: B = { c: { d: true, f: '' }, b: '', a: 1 };
 
     // @ts-expect-error
     b.c.d = false; // error 不能修改.c.d，ts检查会报错
@@ -266,10 +266,10 @@ describe('object', () => {
 
     const obj2: RequiredPart<O, 'a'> = { a: 1, c: 2 };
 
-    expectType<number | undefined>(obj.a);
+    expectType<undefined | number>(obj.a);
     // @ts-expect-error
     expectError<number>(obj.a);
-    expectType<number | undefined>(obj.b);
+    expectType<undefined | number>(obj.b);
     // @ts-expect-error
     expectError<number>(obj.b);
     expectType<number>(obj.c);
@@ -280,15 +280,15 @@ describe('object', () => {
     expectType<number>(obj2.c);
 
     expectError<{
-      a: number;
       b?: number;
+      a: number;
       c: number;
       // @ts-expect-error
     }>(obj);
 
     expectType<{
-      a: number;
       b?: number;
+      a: number;
       c: number;
     }>(obj2);
   });
@@ -306,8 +306,8 @@ describe('object', () => {
 
     expectType<{
       a?: number;
-      b: number;
       c?: number;
+      b: number;
     }>(obj);
   });
   test('TupleToObj', () => {
@@ -324,10 +324,10 @@ describe('object', () => {
     type T2 = TupleToObj<typeof a, string, 'a' | 'c', 'dd'>;
 
     expectType<T2>({});
-    expectType<Required<T2>>({ '1': '', '2': '', '3': '', a: 'dd', b: '', c: 'dd' });
-    expectType<T2>({ '1': '', '2': '', '3': '', a: 'dd', b: '', c: 'dd' });
+    expectType<Required<T2>>({ '1': '', '2': '', '3': '', a: 'dd', c: 'dd', b: '' });
+    expectType<T2>({ '1': '', '2': '', '3': '', a: 'dd', c: 'dd', b: '' });
     // @ts-expect-error
-    expectError<Required<T2>>({ '1': '', '2': '', '3': '', a: 'd', b: '', c: 'd' });
+    expectError<Required<T2>>({ '1': '', '2': '', '3': '', a: 'd', c: 'd', b: '' });
   });
 
   test('ConvertOptionalPart', () => {
@@ -341,7 +341,7 @@ describe('object', () => {
 
     expectType<ConvertOptionalPart<T, 'a'>>({} as { a: 1; b: 2; c: 3; d: 4; e: 5 });
     expectType<ConvertOptionalPart<T, 'a'>>({} as { a: undefined; b: 2; c: 3; d: 4; e: 5 });
-    expectType<ConvertOptionalPart<T, 'a'>>({} as { a: 1 | undefined; b: 2; c: 3; d: 4; e: 5 });
+    expectType<ConvertOptionalPart<T, 'a'>>({} as { a: undefined | 1; b: 2; c: 3; d: 4; e: 5 });
 
     expectType<ConvertOptionalPart<T, 'a'>>({ a: 1, b: 2, c: 3, d: 4, e: 5 });
     expectType<ConvertOptionalPart<T, 'a'>>({ a: undefined, b: 2, c: 3, d: 4, e: 5 });
@@ -402,7 +402,7 @@ describe('object', () => {
       e: 5,
     });
 
-    const v2 = { a: undefined, b: 2, c: 3, d: undefined, e: undefined };
+    const v2 = { a: undefined, d: undefined, e: undefined, b: 2, c: 3 };
     // @ts-expect-error d 和 e 不可设置为 undefined
     expectError<ConvertOptionalPart<T2, 'a' | 'b' | 'c'>>(v2);
   });
@@ -417,7 +417,7 @@ describe('object', () => {
 
     expectType<ConvertOptional<T>>({} as { a: 1; b: 2; c: 3; d: 4; e: 5 });
     expectType<ConvertOptional<T>>({} as { a: undefined; b: 2; c: 3; d: 4; e: 5 });
-    expectType<ConvertOptional<T>>({} as { a: 1 | undefined; b: 2; c: 3; d: 4; e: 5 });
+    expectType<ConvertOptional<T>>({} as { a: undefined | 1; b: 2; c: 3; d: 4; e: 5 });
 
     expectType<ConvertOptional<T>>({ a: 1, b: 2, c: 3, d: 4, e: 5 });
     expectType<ConvertOptional<T>>({ a: undefined, b: 2, c: 3, d: 4, e: 5 });
@@ -525,19 +525,19 @@ describe('object', () => {
       b: string;
     }
 
-    const objR: A = { a: 1, b: 'b' };
+    const objR: A = { b: 'b', a: 1 };
     // @ts-expect-error
     objR.a = 2;
 
-    const objW: Writeable<A> = { a: 1, b: 'b' };
+    const objW: Writeable<A> = { b: 'b', a: 1 };
     objW.a = 2;
 
     type B = Readonly<A>;
-    const objR2: B = { a: 1, b: 'b' };
+    const objR2: B = { b: 'b', a: 1 };
     // @ts-expect-error
     objR2.b = 'c';
 
-    const objW2: Writeable<B> = { a: 1, b: 'b' };
+    const objW2: Writeable<B> = { b: 'b', a: 1 };
     objW2.b = 'c';
   });
 
@@ -548,6 +548,6 @@ describe('object', () => {
     // @ts-expect-error
     expectError<ReverseObject<{ a: 1; b: 2; c: 3 }>>({ 1: 'a', 2: 'b' });
     // @ts-expect-error
-    expectError<ReverseObject<{ a: 1; b: 2; c: 3 }>>({ 0: 1, 1: 'a', 2: 'b' });
+    expectError<ReverseObject<{ a: 1; b: 2; c: 3 }>>({ 1: 'a', 2: 'b', 0: 1 });
   });
 });

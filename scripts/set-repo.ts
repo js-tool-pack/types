@@ -1,13 +1,13 @@
-import * as Fs from 'fs';
-import { type Config, RepoType } from './init-pkg';
-import { execa } from 'execa';
 import { createSrcAndTests, rootDir, useFile } from './utils';
+import { type Config, RepoType } from './init-pkg';
 import { toCamel } from '@mxssfd/core';
+import { execa } from 'execa';
+import * as Fs from 'fs';
 
 const paths = {
-  typedoc: rootDir('typedoc.json'),
-  tsconfig: rootDir('tsconfig.json'),
   pnpmWorkspace: rootDir('pnpm-workspace.yaml'),
+  tsconfig: rootDir('tsconfig.json'),
+  typedoc: rootDir('typedoc.json'),
   pkgs: rootDir('packages'),
   src: rootDir('src'),
 };
@@ -53,19 +53,19 @@ const multi = {
     pkgJson['exports'] = {
       '.': {
         import: {
-          node: `./dist/${config.name}.cjs.js`,
           default: `./dist/${config.name}.esm-bundler.js`,
+          node: `./dist/${config.name}.cjs.js`,
         },
         require: `./dist/${config.name}.cjs.js`,
       },
     };
     pkgJson['buildOptions'] = {
-      name: toCamel(pkgJson['name'], '-', true),
       formats: ['esm-bundler', 'esm-browser', 'cjs', 'global'],
+      name: toCamel(pkgJson['name'], '-', true),
     };
     pkgJson['publishConfig'] = {
-      access: 'public',
       registry: 'https://registry.npmjs.org/',
+      access: 'public',
     };
     updatePkg(pkgJson);
   },
@@ -74,8 +74,8 @@ const multi = {
 
     apiJson['mainEntryPointFilePath'] = './dist/src/index.d.ts';
     apiJson['dtsRollup'] = {
-      enabled: true,
       publicTrimmedFilePath: './dist/<unscopedPackageName>.d.ts',
+      enabled: true,
     };
     updateApiJson(apiJson);
   },

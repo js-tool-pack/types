@@ -1,5 +1,5 @@
-import { expectError, expectType } from './utils';
 import type { SettableDOMProps, SettableDOMStyle } from '../src';
+import { expectError, expectType } from './utils';
 
 describe('dom', () => {
   test('SettableProps', () => {
@@ -8,14 +8,14 @@ describe('dom', () => {
     // @ts-expect-error
     expectError<T>({ id: '' });
 
-    expectType<SettableDOMProps<HTMLAnchorElement>>({ id: '', className: '', href: '' });
+    expectType<SettableDOMProps<HTMLAnchorElement>>({ className: '', href: '', id: '' });
   });
   test('SettableProps', () => {
     type T = SettableDOMProps<HTMLDivElement>;
-    expectType<T>({ id: '', className: '' });
+    expectType<T>({ className: '', id: '' });
     // @ts-expect-error
-    expectError<T>({ id: '', className: '', href: '' });
+    expectError<T>({ className: '', href: '', id: '' });
 
-    expectType<SettableDOMProps<HTMLAnchorElement>>({ id: '', className: '', href: '' });
+    expectType<SettableDOMProps<HTMLAnchorElement>>({ className: '', href: '', id: '' });
   });
 });

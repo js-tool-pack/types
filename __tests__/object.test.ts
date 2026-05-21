@@ -23,7 +23,6 @@ import type {
 } from '../src';
 import { expectError, expectType } from './utils';
 import type { Writeable } from '../src';
-import * as console from 'console';
 
 const ab: 'a' | 'b' = Math.random() > 0.5 ? 'a' : 'b';
 const abc: 'a' | 'b' | 'c' = Math.random() > 0.5 ? 'a' : Math.random() > 0.5 ? 'b' : 'c';

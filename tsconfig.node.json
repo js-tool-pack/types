@@ -3,7 +3,6 @@
   "compilerOptions": {
     "composite": true,
     "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true
 
     // tsutils 会报错 强制 TypeScript 在从 node_modules 中的包中读取时查询 package.json 文件的 exports 字段
